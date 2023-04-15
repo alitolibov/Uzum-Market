@@ -17,11 +17,9 @@ export default {
         xl: '1440px'
       },
       backgroundImage: {
-        bag: 'url("./public/images/bag.png")',
         like: 'url("./public/images/like.png")',
         chel: 'url("./public/images/chel.png")',
         menuIcon: 'url("./public/images/menuIcon.png")',
-        close: 'url("./public/images/close.png")',
       }
     },
   },

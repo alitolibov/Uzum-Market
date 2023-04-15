@@ -14,3 +14,14 @@
 .css-uttm9k:hover, .css-uttm9k[data-hover] {
   background-color: white !important;
 }
+.css-15e9f73:hover, .css-15e9f73[data-hover] {
+  background: white !important;
+}
+
+input{
+  all: unset;
+}
+
+.borderBottom{
+  border-bottom: 1px solid #00000015;
+}
