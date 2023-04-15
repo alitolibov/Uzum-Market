@@ -1,3 +1,4 @@
+import { Input } from "@chakra-ui/react";
 import { useState } from "react";
 import CatalogMobile from "./CatalogMobile";
 
@@ -33,8 +34,8 @@ const HeaderMobile = () => {
 					</div>
 				</div>
 				<label className="flex items-center gap-[7px] bg-[#76797f1a] h-[35px] rounded-[8px] px-[20px]">
-				<img src="../../public/images/search.png" className='w-[20px] h-[20px] invert-[40%] cursor-pointer object-contain' alt="" />
-				<input type="text" className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] px-[5px]" placeholder="Искать товары и категории"/>
+				<img src="../../public/images/search.png" className='w-[19px] h-[19px] invert-[40%] cursor-pointer object-contain' alt="" />
+				<Input variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] px-[5px]" placeholder='Искать товары и категории' />
 				</label>
 			</div>
 		</header>
