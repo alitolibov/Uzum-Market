@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
 import FooterMobile from "../components/FooterMobile";
-import HeaderMobile from "../components/HeaderMobile";
+import Header from "../components/Header";
 
 const LayoutMobile = () => {
     return ( 
     <div className="min-h-[100vh]">
-    <HeaderMobile/>
+    <Header/>
     <main className="px-[15px]">
         <Outlet/>
     </main>
