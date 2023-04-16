@@ -35,7 +35,7 @@ const HeaderMobile = () => {
 				</div>
 				<label className="flex items-center gap-[7px] bg-[#76797f1a] h-[35px] rounded-[8px] px-[20px]">
 				<img src="../../public/images/search.png" className='w-[19px] h-[19px] invert-[40%] cursor-pointer object-contain' alt="" />
-				<Input variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] px-[5px]" placeholder='Искать товары и категории' />
+				<Input variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории' />
 				</label>
 			</div>
 		</header>

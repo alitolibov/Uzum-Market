@@ -4,7 +4,7 @@ import HeaderMobile from "../components/HeaderMobile";
 
 const LayoutMobile = () => {
     return ( 
-    <div className="relative min-h-[100vh]">
+    <div className="min-h-[100vh]">
     <HeaderMobile/>
     <main className="px-[15px]">
         <Outlet/>
