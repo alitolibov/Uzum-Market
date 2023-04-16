@@ -17,7 +17,11 @@
 .css-15e9f73:hover, .css-15e9f73[data-hover] {
   background: white !important;
 }
-
+.css-1t0v89k:hover, .css-1t0v89k[data-hover] {
+  background: white !important;
+}
+.st0{fill:#3B5998;}
+	.st1{fill:#FFFFFF;}
 input{
   all: unset;
 }

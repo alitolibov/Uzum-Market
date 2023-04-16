@@ -20,6 +20,9 @@ export default {
         like: 'url("./public/images/like.png")',
         chel: 'url("./public/images/chel.png")',
         menuIcon: 'url("./public/images/menuIcon.png")',
+        facebook: 'url("./public/images/facebook.png")',
+        insta: 'url("./public/images/insta.png")',
+        telega: 'url("./public/images/telega.png")',
       }
     },
   },
