@@ -2,7 +2,7 @@ import AboutUs from "./AboutUs";
 
 const Footer = () => {
     return ( 
-        <footer className="flex flex-col gap-[30px] px-[32px] py-[25px] w-full">
+        <footer className="flex flex-col gap-[30px] px-[32px] py-[25px] w-full lg:w-[95%] lg:px-[0] lg:mx-auto">
             <div className="flex w-[80%] justify-between">
                 <div className="flex flex-col gap-[15px] items-start">
                 <p className="text-[14px] font-[500] text-center">О нас</p>

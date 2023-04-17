@@ -5,11 +5,13 @@ const CatalogMobile = ({open, changeOpen}) => {
 
     useEffect(() => {
        let body = document.body
+       let catalog = document.querySelector('#catalog')
        body.style.overflow = open ? 'hidden' : null 
+        open ? catalog.classList.add('click') : catalog.classList.remove('click')
     }, [open])
 
     return (
-        <div className="absolute top-0 w-full h-[100vh] bg-[#EFEFEF] flex-col gap-[7px]" style={{display: open ? 'flex' : 'none'}}>
+        <section id="catalog" className="absolute top-0 left-[-100%] duration-[300ms] w-full h-[100vh] bg-[#EFEFEF] flex-col gap-[7px]">
 			<div className="px-[15px] bg-[#fff] h-[48px] flex items-center justify-between">
 			<svg onClick={changeOpen} className="cursor-pointer" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-test-id="button__close-sidebar"><path fillRule="evenodd" clipRule="evenodd" d="M6.28033 5.21967C5.98744 4.92678 5.51256 4.92678 5.21967 5.21967C4.92678 5.51256 4.92678 5.98744 5.21967 6.28033L10.9393 12L5.21967 17.7197C4.92678 18.0126 4.92678 18.4874 5.21967 18.7803C5.51256 19.0732 5.98744 19.0732 6.28033 18.7803L12 13.0607L17.7197 18.7803C18.0126 19.0732 18.4874 19.0732 18.7803 18.7803C19.0732 18.4874 19.0732 18.0126 18.7803 17.7197L13.0607 12L18.7803 6.28033C19.0732 5.98744 19.0732 5.51256 18.7803 5.21967C18.4874 4.92678 18.0126 4.92678 17.7197 5.21967L12 10.9393L6.28033 5.21967Z"></path></svg>
 			<div className="">
@@ -96,7 +98,7 @@ const CatalogMobile = ({open, changeOpen}) => {
 				</AccordionItem>
 			</Accordion>
             </div>
-		</div>
+		</section>
      );
 }
  
