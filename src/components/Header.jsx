@@ -31,7 +31,7 @@ const Header = () => {
 	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	return ( 
 		<>
-		<header className="flex flex-col gap-[15px] relative">
+		<header className="flex flex-col gap-[15px] relative overflow-hidden">
 			{
 				viewport_width > 1024 ? (
 					<div className="flex items-center justify-between bg-[#f4f5f5] px-[25px] h-[32px]">
@@ -83,7 +83,8 @@ const Header = () => {
 							<img src="../../public/images/search.png" className='w-[19px] h-[19px] cursor-pointer object-contain' alt="" />
 							</div>
 							</label>
-						</div>   
+						</div> 
+					
 					<div className="flex items-center gap-[20px]">
 					<div className='w-[22px] h-[22px] cursor-pointer bg-cover bg-chel'/>
 					<div className='w-[22px] h-[22px] cursor-pointer bg-cover bg-like'/>
@@ -94,6 +95,29 @@ const Header = () => {
 				<img src="../../public/images/search.png" className='w-[19px] h-[19px] invert-[40%] cursor-pointer object-contain' alt="" />
 				<Input variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории' />
 				</label>
+			</div>
+			<div className="hidden items-center gap-[25px] md:flex">
+			<div className="flex items-center gap-[25px] px-[25px] whitespace-nowrap w-[90%] overflow-hidden">
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Электроника</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Бытовая техника</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Одежда</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Обувь</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Аксессуары</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Красота</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Здоровье</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Товары для дома</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Строительство и ремонт</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Автотовары</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Детские товары</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Хобби и творчество</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Спорт и отдых</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Продукты питания</p>
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Бытовая химия и личная гигиена</p>
+			</div>  
+			<div className="flex items-center gap-[5px]">
+			<p className="text-[#62656a] text-[14px] cursor-pointer">Ещё </p>
+			<img src="../../public/images/bottom.png" className="w-[10px] h-[10px]" alt="" />
+			</div>
 			</div>
 		</header>
 		<CatalogMobile open={open} changeOpen={changeOpen}/>
