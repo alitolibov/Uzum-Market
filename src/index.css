@@ -61,9 +61,9 @@ input{
 .height {
   height: calc(100vh - 80%);
 }
-.heightTwo {
-  height: calc(100vh - 80%) !important;
-}
+/* .heightTwo {
+  height: calc(100vh ) !important;
+} */
 .swiper-button-prev {
   border: 1px solid rgba(118,121,127,0.3) !important;
   background: #ffffff50 !important;

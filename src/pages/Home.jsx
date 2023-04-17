@@ -4,8 +4,13 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay} from "swiper";
 import SwiperBig from "../components/SwiperBig";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+    const data = useSelector(state => state.goods.data)
+
+    console.log(data);
+
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     return ( 
     <div className="">
@@ -39,6 +44,8 @@ const Home = () => {
       </Swiper>
         ) : <SwiperBig/>
     }
+    <ul>
+    </ul>
     </div> );
 }
  
