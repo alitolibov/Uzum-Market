@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay} from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
@@ -9,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // import required modules
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
+import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from "swiper";
 
 export default function SwiperBig() {
   return (
@@ -20,7 +19,7 @@ export default function SwiperBig() {
         pagination={true}
         mousewheel={true}
         keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
         className="mySwiper heightTwo w-full overflow-hidden rounded-[12px] mt-[15px] mb-[48px]"
         autoplay={{
             delay: 2500,
