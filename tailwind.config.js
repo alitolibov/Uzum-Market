@@ -12,8 +12,8 @@ export default {
       },
       screens: {
         sm: '200px',
-        md: '768px',
-        lg: '1028px',
+        md: '1024px',
+        // lg: '1024px',
         xl: '1440px'
       },
       backgroundImage: {

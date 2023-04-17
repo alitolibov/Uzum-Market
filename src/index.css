@@ -30,3 +30,7 @@ input{
 .borderBottom{
   border-bottom: 1px solid #00000015;
 }
+
+.borderFull{
+  border: 1px solid rgba(118,121,127,0.3)
+}

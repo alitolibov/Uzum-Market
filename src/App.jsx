@@ -8,7 +8,7 @@ function App() {
     <>
       <Routes>
          <Route path='/' element={<LayoutMobile/>}>
-            
+            <Route path='/' element={''}/>
          </Route>
       </Routes>
     </>
