@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import "swiper/css";
+// import "swiper/css";
 import '../index.css'
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -12,15 +12,15 @@ import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from "swiper";
 
 export default function SwiperBig() {
   return (
-    <>
+    <div className="">
       <Swiper
+        className="mySwiper height w-full overflow-hidden rounded-[12px] mt-[15px] mb-[48px]"
         cssMode={true}
         navigation={true}
         pagination={true}
         mousewheel={true}
         keyboard={true}
         modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
-        className="mySwiper h-[300px] w-full overflow-hidden rounded-[12px] mt-[15px] mb-[48px]"
         autoplay={{
             delay: 2500,
             disableOnInteraction: false,
@@ -40,12 +40,9 @@ export default function SwiperBig() {
             <img src="https://images.uzum.uz/cgqfv57g49devoadeung/main_page_banner.jpg" className="object-cover w-full h-full" alt="" />
         </SwiperSlide>
         <SwiperSlide>
-            <img src="https://images.uzum.uz/cgqg03vhj8j9g69cpmg0/main_page_banner.jpg" className="object-cover w-full h-full" alt="" />
-        </SwiperSlide>
-        <SwiperSlide>
             <img src="https://images.uzum.uz/cgqfulb57mg9720egung/main_page_banner.jpg" className="object-cover w-full h-full" alt="" />
         </SwiperSlide>
       </Swiper>
-    </>
+    </div>
   );
 }

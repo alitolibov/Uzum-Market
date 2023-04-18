@@ -57,13 +57,6 @@ input{
 .hover:hover p {
   color: black;
 }
-
-.height {
-  height: calc(100vh - 80%);
-}
-/* .heightTwo {
-  height: calc(100vh ) !important;
-} */
 .swiper-button-prev {
   border: 1px solid rgba(118,121,127,0.3) !important;
   background: #ffffff50 !important;
@@ -92,3 +85,19 @@ input{
   background-repeat: no-repeat !important;
   background-position: 7px 6px !important;
 }
+.height {
+  height: calc(100vh - 70%) !important;
+}
+.heightTwo {
+  height: calc(100vh - 80%) !important;
+}
+.swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+.borderFull{
+  border: 1px solid rgba(118,121,127,0.3)
+}
+.auto{
+  grid-auto-rows: minmax(0, 2fr);
+}
+
