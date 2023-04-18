@@ -14,7 +14,7 @@ export default function SwiperBig() {
   return (
     <div className="">
       <Swiper
-        className="mySwiper height w-full overflow-hidden rounded-[12px] mt-[15px] mb-[48px]"
+        className="mySwiper w-full aspect overflow-hidden rounded-[12px] mt-[15px] mb-[48px]"
         cssMode={true}
         navigation={true}
         pagination={true}

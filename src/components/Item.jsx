@@ -26,7 +26,7 @@ const Item = ({item}) => {
         </div>
         <div className="w-full h-[140px] px-[4px] pb-[4px] flex flex-col justify-between">
             <div className="flex flex-col gap-[3px] smx:gap-[0] smx:h-[60%] smx:justify-between">
-            <p className="text-[12px] text-ellipsis md:text-[12.8px]">{item?.title}</p>
+            <p className="text-[12px] textEllipsis md:text-[12.8px]">{item?.title}</p>
             <div className="flex items-center gap-[2px]">
             <img data-v-b3e9397c="" src="data:image/svg+xml,%3csvg width='18' height='18' viewBox='0 0 19 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e %3cpath d='M9 12.9525L13.635 15.75L12.405 10.4775L16.5 6.93L11.1075 6.4725L9 1.5L6.8925 6.4725L1.5 6.93L5.595 10.4775L4.365 15.75L9 12.9525Z' fill='%23F5A623'/%3e %3c/svg%3e" data-test-id="icon__rating-star" style={{width: '14px'}}/>
             <p className="text-[11.2px] text-[#8a8d93]">{item?.rating}</p>

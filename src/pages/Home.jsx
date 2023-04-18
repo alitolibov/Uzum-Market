@@ -94,7 +94,6 @@ const Home = () => {
         }
         <button onClick={countTexFn} id='btnShow' className="cursor-pointer duration-[300ms] w-full h-[56px] bg-[#76797f1a] font-[600] rounded-[8px] col-span-full hover:bg-[#65686d27] md:col-start-2 md:col-end-5" >{countTex < arrTex.length ? 'Показать ещё' : 'Свернуть все'}</button>
     </div>
-    <div className="w-[50px] h-[50px]" onClick={() => window.scrollY = 0}>toop</div>
     </div> 
     );
 }
