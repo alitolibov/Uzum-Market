@@ -12,10 +12,10 @@ const Item = ({item}) => {
     let salePrice = Math.round(item.price ? item.price - (item.price / 100 * item?.salePercentage) : null)
     let salePrices = Math.round(item.price ? item.price / 12 : null)
     return ( 
-    <div className="rounded-[8px] cursor-pointer hoverBlock overflow-hidden duration-[250ms] min-w-[140px] h-[410px] smx:h-[510px] mdx:h-[460px]">
+    <div className="rounded-[8px] cursor-pointer hoverBlock overflow-hidden duration-[250ms] min-w-[140px] h-fit">
         <div className="relative duration-[250ms] overflow-hidden bg-[#fff] mb-[10px]">
             <img src="../../public/images/heart.png" className="w-[20px] duration-[300ms] h-[20px] absolute right-[10px] top-[10px] z-[10] hover:invert-[70%]" alt="" />
-            <div className="w-full h-[260px] duration-[250ms] bg-center bg-no-repeat cover smx:h-[360px] mdx:h-[310px]" style={{backgroundImage: `url('${item?.media[0]}')`}}></div>
+            <div className="w-full aspectImg duration-[250ms] bg-center bg-no-repeat cover" style={{backgroundImage: `url('${item?.media[0]}')`}}></div>
             {
                 item?.salePercentage !== 0 ? (
                     <div className="w-[50px] rounded-[4px] h-[21px] bg-[#5000aa] flex items-center justify-center absolute left-0 bottom-0 z-10">

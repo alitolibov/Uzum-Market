@@ -112,6 +112,9 @@ box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
 .aspect {
   aspect-ratio: 3 / 1 !important;
 }
+.aspectImg {
+  aspect-ratio: 8 / 10.2 !important;
+}
 .textEllipsis {
   display: -webkit-box;
   -webkit-box-orient: vertical;
