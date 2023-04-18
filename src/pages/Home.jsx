@@ -13,28 +13,38 @@ const Home = () => {
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
 
-    const [countGame, setCountGame] = useState(viewport_width < 1300 ? 12 : 15)
-
-    let arrGame 
-    arrGame = data.filter(item => item.type === 'furniture' || item.type === "PC")
+    const [count, setCount] = useState(viewport_width < 1300 ? 12 : 10)
+    const [countTex, setCountTex] = useState(viewport_width < 1300 ? 12 : 10)
+    let arrGame = data.filter(item => item.type === 'furniture' || item.type === "PC")
+    let arrTex = data.filter(item => item.type === 'kitchen' || item.type === "audio")
 
     const countGameFn = () => {
-        let btn = document.querySelector('#btnShow')
         if(viewport_width < 1300) {
-            if(countGame <= arrGame.length) {
-                setCountGame(countGame + 3)
-                btn.innerHTML = 'Показать ещё'
+            if(count <= arrGame.length) {
+                setCount(count + 3)
             } else {
-                setCountGame(12)
-                btn.innerHTML = 'Свернуть все'
+                setCount(12)
             }
         } else {
-            if(countGame <= arrGame.length) {
-                setCountGame(countGame + 5)
-                btn.innerHTML = 'Показать ещё'
+            if(count <= arrGame.length) {
+                setCount(count + 5)
             } else {
-                setCountGame(15)
-                btn.innerHTML = 'Свернуть все'
+                setCount(15)
+            }
+    } }
+
+    const countTexFn = () => {
+        if(viewport_width < 1300) {
+            if(countTex <= arrTex.length) {
+                setCountTex(countTex + 3)
+            } else {
+                setCountTex(12)
+            }
+        } else {
+            if(countTex <= arrTex.length) {
+                setCountTex(countTex + 5)
+            } else {
+                setCountTex(15)
             }
     } }
 
@@ -73,10 +83,18 @@ const Home = () => {
     <p className="text-[16px] font-[600] my-[14px] md:text-[28px]">Для геймеров</p>
     <div className="grid grid-cols-2 gap-[8px] gap-y-[15px] auto mdx:grid-cols-3 lgx:grid-cols-4 lg:grid-cols-5 md:gap-x-[20px] md:gap-y-[32px] ">
         {
-            viewport_width < 1300 ? arrGame.slice(0, countGame).map((item, idx) => <Item item={item}/>) : data.slice(0, countGame).map((item, idx) => <Item item={item}/>)
+            viewport_width < 1300 ? arrGame.slice(0, count).map((item, idx) => <Item item={item} key={item.id}/>) : arrGame.slice(0, count).map((item, idx) => <Item item={item} key={item.id}/>)
         }
-        <button onClick={countGameFn} id='btnShow' className="cursor-pointer duration-[300ms] w-full h-[56px] bg-[#76797f1a] font-[600] rounded-[8px] col-span-full hover:invert-[25%]" >Показать ещё</button>
+        <button onClick={countGameFn} id='btnShow' className="cursor-pointer duration-[300ms] w-full h-[56px] bg-[#76797f1a] font-[600] rounded-[8px] col-span-full hover:bg-[#65686d27] md:col-start-2 md:col-end-5" >{count < arrGame.length ? 'Показать ещё' : 'Свернуть все'}</button>
     </div>
+    <p className="text-[16px] font-[600] my-[14px] md:text-[28px]">Топовая техника по низкой цене</p>
+    <div className="grid grid-cols-2 gap-[8px] gap-y-[15px] auto mdx:grid-cols-3 lgx:grid-cols-4 lg:grid-cols-5 md:gap-x-[20px] md:gap-y-[32px] ">
+        {
+            viewport_width < 1300 ? arrTex.slice(0, countTex).map((item, idx) => <Item item={item} key={item.id}/>) : arrTex.slice(0, countTex).map((item, idx) => <Item item={item} key={item.id}/>)
+        }
+        <button onClick={countTexFn} id='btnShow' className="cursor-pointer duration-[300ms] w-full h-[56px] bg-[#76797f1a] font-[600] rounded-[8px] col-span-full hover:bg-[#65686d27] md:col-start-2 md:col-end-5" >{countTex < arrTex.length ? 'Показать ещё' : 'Свернуть все'}</button>
+    </div>
+    <div className="w-[50px] h-[50px]" onClick={() => window.scrollY = 0}>toop</div>
     </div> 
     );
 }

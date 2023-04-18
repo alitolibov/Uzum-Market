@@ -94,8 +94,14 @@ input{
 .cover{
   background-size: 100%;
 }
+
 .hoverBlock:hover .cover {
   background-size: 105%;
+}
+.hoverBlock:hover {
+  -webkit-box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
+box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
 }
 .swiper-pagination-bullet-active {
   background: rgba(255, 255, 255, 0.7) !important;

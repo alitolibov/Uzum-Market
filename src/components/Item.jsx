@@ -1,8 +1,20 @@
 const Item = ({item}) => {
+
+    function prettify(num) {
+        var n = num.toString();
+        return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
+    }
+
+    prettify(1000000);
+
+    let price = prettify(item.price) 
+    
+    let salePrice = Math.round(item.price ? item.price - (item.price / 100 * item?.salePercentage) : null)
+    let salePrices = Math.round(item.price ? item.price / 12 : null)
     return ( 
     <div className="rounded-[8px] cursor-pointer hoverBlock overflow-hidden duration-[250ms] min-w-[140px] h-[410px] smx:h-[510px] mdx:h-[460px]">
         <div className="relative duration-[250ms] overflow-hidden bg-[#fff] mb-[10px]">
-            <img src="../../public/images/heart.png" className="w-[20px] h-[20px] absolute right-[10px] top-[10px] z-[10]" alt="" />
+            <img src="../../public/images/heart.png" className="w-[20px] duration-[300ms] h-[20px] absolute right-[10px] top-[10px] z-[10] hover:invert-[70%]" alt="" />
             <div className="w-full h-[260px] duration-[250ms] bg-center bg-no-repeat cover smx:h-[360px] mdx:h-[310px]" style={{backgroundImage: `url('${item?.media[0]}')`}}></div>
             {
                 item?.salePercentage !== 0 ? (
@@ -16,11 +28,11 @@ const Item = ({item}) => {
             <div className="flex flex-col gap-[3px] smx:gap-[0] smx:h-[60%] smx:justify-between">
             <p className="text-[12px] text-ellipsis md:text-[12.8px]">{item?.title}</p>
             <div className="flex items-center gap-[2px]">
-            <img data-v-b3e9397c="" src="data:image/svg+xml,%3csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3e %3cpath d='M9 12.9525L13.635 15.75L12.405 10.4775L16.5 6.93L11.1075 6.4725L9 1.5L6.8925 6.4725L1.5 6.93L5.595 10.4775L4.365 15.75L9 12.9525Z' fill='%23F5A623'/%3e %3c/svg%3e" data-test-id="icon__rating-star" style={{width: '14px'}}/>
+            <img data-v-b3e9397c="" src="data:image/svg+xml,%3csvg width='18' height='18' viewBox='0 0 19 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e %3cpath d='M9 12.9525L13.635 15.75L12.405 10.4775L16.5 6.93L11.1075 6.4725L9 1.5L6.8925 6.4725L1.5 6.93L5.595 10.4775L4.365 15.75L9 12.9525Z' fill='%23F5A623'/%3e %3c/svg%3e" data-test-id="icon__rating-star" style={{width: '14px'}}/>
             <p className="text-[11.2px] text-[#8a8d93]">{item?.rating}</p>
             </div>
             <div className="w-fit px-[5px] h-[17px] flex items-center justify-center bg-[#ffff00]">
-                <p className="text-[11px]"><span>{Math.round(item.price ? item?.price / 12 : null)}</span> руб/мес</p>
+                <p className="text-[11px]"><span>{prettify(salePrices)}</span> руб/мес</p>
             </div>
             </div>
             <div className="flex items-end justify-between">
@@ -28,11 +40,11 @@ const Item = ({item}) => {
                     {
                         item?.salePercentage !== 0 ? (
                             <div className="flex flex-col gap-[2px]">
-                            <p className="text-[9.8px] text-[#757575] line-through md:text-[11.2px]"><span>{item?.price}</span> руб</p>
-                            <p className="text-[11px] font-[500] md:text-[14px]"><span>{Math.round(item.price ? item?.price - (item?.price / 100 * item?.salePercentage) : null)}</span> руб</p>
+                            <p className="text-[9.8px] text-[#757575] line-through md:text-[11.2px]"><span>{price}</span> руб</p>
+                            <p className="text-[11px] font-[500] md:text-[15px]"><span>{prettify(salePrice)}</span> руб</p>
                             </div>
                         ) : <div className="flex flex-col gap-[2px]">
-                            <p className="text-[11px] font-[500] md:text-[14px]"><span>{item?.price}</span> руб</p>
+                            <p className="text-[11px] font-[500] md:text-[16px]"><span>{price}</span> руб</p>
                         </div>
                     }
                 
