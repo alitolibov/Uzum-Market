@@ -4,7 +4,7 @@ import FooterAccordions from "./FooterAccordions";
 
 const FooterMobile = () => {
     return ( 
-    <footer className="w-full h-fit">
+    <footer className="w-full h-fit mt-[15px]">
         <FooterAccordions/>
         <AboutUs/>
         <p className="text-[14px] font-[500] cursor-pointer mt-[25px] mb-[14px] text-center">Соглашение о конфиденциальности</p>

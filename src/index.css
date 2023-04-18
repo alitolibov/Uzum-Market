@@ -91,13 +91,17 @@ input{
 .heightTwo {
   height: calc(100vh - 80%) !important;
 }
+.cover{
+  background-size: 100%;
+}
+.hoverBlock:hover .cover {
+  background-size: 105%;
+}
 .swiper-pagination-bullet-active {
   background: rgba(255, 255, 255, 0.7) !important;
 }
 .borderFull{
   border: 1px solid rgba(118,121,127,0.3)
 }
-.auto{
-  grid-auto-rows: minmax(0, 2fr);
-}
+
 
