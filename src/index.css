@@ -115,12 +115,44 @@ box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
 .aspectImg {
   aspect-ratio: 8 / 10.3 !important;
 }
+.aspectSwiperBlock {
+  aspect-ratio: 8 / 8.89 !important;
+}
+.aspectImgSlider{
+  aspect-ratio: 8 / 10.65 !important;
+}
+.hr{
+  margin: 32px 0 24px;
+  border-bottom: 1px solid rgba(118,121,127,0.2);
+}
+.borderFul{
+  border: 1px solid rgba(0, 0, 0, 0.12);
+}
+/* .aspectSwiper {
+  
+} */
 .textEllipsis {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.rotate{
+  top: 48%;
+  transform: rotate(90deg);
+}
+.borderY {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.borderB{
+  border-bottom: 2px solid #7000ff;
+}
+.footerShadow {
+  -webkit-box-shadow: 0px -2px 8px -3px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 0px -2px 8px -3px rgba(34, 60, 80, 0.2);
+box-shadow: 0px -2px 8px -3px rgba(34, 60, 80, 0.2);
 }
 
 
