@@ -10,6 +10,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  user-select: none;
 }
 
 .css-uttm9k:hover, .css-uttm9k[data-hover] {

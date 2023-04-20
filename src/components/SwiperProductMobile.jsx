@@ -3,23 +3,10 @@ import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from "swiper";
 import '../index.css'
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { useEffect, useState } from "react";
 
-const SwiperProductMobile = ({media, count, bol}) => {
-    const [swiper, setSwiper] = useState(null);
-    const [number, setNumber] = useState(0)
+const SwiperProductMobile = ({media}) => {
 
-    const nexto = () => {
-        swiper?.slideNext();
-      };
-    useEffect(() => {
-        setNumber(0)
-        const swipers = document.querySelector('.swiper')
-        let interval = setInterval(() => {
-           
-        }, 500);
-    },[bol])
-    
+  
     return ( 
         <>
         <Swiper
@@ -29,9 +16,6 @@ const SwiperProductMobile = ({media, count, bol}) => {
         pagination={true}
         mousewheel={true}
         keyboard={true}
-        onSwiper={(s) => {
-            setSwiper(s);
-          }}
         modules={[Navigation, Mousewheel, Keyboard]}
           loop={true}
       >
