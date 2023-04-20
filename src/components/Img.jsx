@@ -1,7 +1,9 @@
-const Img = ({item}) => {
-    console.log(item);
+const Img = ({index, fn, item}) => {
+
+    let idx = index + 1
+
     return ( 
-        <div className="w-full bg-contain bg-no-repeat bg-center aspectImgSlider" style={{backgroundImage: `url('${item}')`}}></div>
+        <div onClick={() => fn(idx)} className="w-full bg-contain bg-no-repeat bg-center aspectImgSlider" style={{backgroundImage: `url('${item}')`}}></div>
      );
 }
  

@@ -13,8 +13,9 @@ import { Navigation } from "swiper";
 import Item from "./Item";
 import { useSelector } from "react-redux";
 
-export default function SwiperProduct() {
+export default function SwiperProduct({type}) {
     let data = useSelector(state => state.goods.data)
+    let arrType = data.filter(item => item.type === type)
   return (
     <div>
       <Swiper
@@ -23,10 +24,9 @@ export default function SwiperProduct() {
         // modules={[Pagination]}
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
-        <SwiperSlide><Item item={data[0]}/></SwiperSlide>
-        <SwiperSlide><Item item={data[1]}/></SwiperSlide>
-        <SwiperSlide><Item item={data[2]}/></SwiperSlide>
-        <SwiperSlide><Item item={data[3]}/></SwiperSlide>
+        {
+            arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
+        }
       </Swiper>
     </div>
   );

@@ -1,13 +1,19 @@
+import { Key } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { useSwiper } from "swiper/react";
 import Img from "../components/Img";
 import SwiperProduct from "../components/SwiperProduct";
 import SwiperProductMobile from "../components/SwiperProductMobile";
+
 
 const ProductPage = () => {
     let data = useSelector(state => state.goods.data)
     let {pathname} = useLocation()
     let ids = pathname.split('/').at(-1)
+    const [count, setCount] = useState(1)
+    const [bol, setBol] = useState(false)
     let filtered = data.filter(item => item.id === +ids)
     let {title, type, rating, salePercentage, price, id, description, media} = filtered[0]
     function prettify(num) {
@@ -16,22 +22,47 @@ const ProductPage = () => {
     }
     let prices = prettify(price) 
 
-    console.log(media);
-
-    
     let salePrice = Math.round(price ? price - (price / 100 * salePercentage) : null)
-    let salePrices = Math.round(price ? price / 12 : null)
+    let salePrices = Math.round(price ? price  * count / 12 : null)
+    const [countIndex, setCountIndex] = useState(0)
+    const [countImg, setCountImg] = useState(0)
+    let [arr, setArr] = useState([])
+    media.map((item, index) => {
+        arr.push({index,item})
+    })
+
+    const increment = () => {
+        setCount(count + 1)
+    }
+    const decrement = () => {
+        if(count !== 1) {
+            setCount(count - 1)
+        }
+    }
+
+    const clickSlide = (index) => {
+        let activeSlide = document.querySelector('.swiper-slide-active').getAttribute('data-index')
+        if(activeSlide < index) {
+            setBol(!bol)
+            setCountIndex(index - activeSlide)
+        } else {
+            setBol(!bol)
+            setCountIndex(activeSlide - index)
+        }
+       
+    }
+
 
     return ( 
     <div>
         <div className="flex relative flex-col gap-[25px] h-fit mt-[20px]">
-            <div className="flex gap-[8px] aspectSwiperBlock w-full">
+            <div className="flex gap-[8px] overflow-hidden aspectSwiperBlock w-full">
                 <div className="w-[17%] h-auto max-h-full flex flex-col gap-[8px]">
                     {
-                        media.map(item => <Img item={item}/>)
+                        arr.map((item, idx) => <Img key={idx} index={item.index} item={item.item} fn={clickSlide}/>)
                     }
                 </div>
-                <SwiperProductMobile media={media}/>
+                <SwiperProductMobile media={media} count={countIndex} bol={bol}/>
             </div>
             <div className="">
                 <div className="flex flex-col gap-[12px]">
@@ -47,10 +78,10 @@ const ProductPage = () => {
                     {
                         salePercentage !== 0 ? (
                             <div className="flex items-center gap-x-[16px] h-[28px]">
-                            <p className="text-[20px] text-[#7000ff] font-[500]"><span>{prettify(salePrice)}</span> руб / ед.</p>
-                            <p className="text-[14px] text-[#757575] line-through"><span>{prettify(price)}</span> руб</p>
+                            <p className="text-[20px] text-[#7000ff] font-[500]"><span>{prettify(salePrice * count)}</span> руб / ед.</p>
+                            <p className="text-[14px] text-[#757575] line-through"><span>{prettify(price * count)}</span> руб</p>
                             </div>
-                        ) : <p className="text-[20px] text-[#7000ff] font-[500]"><span>{prettify(price)}</span> руб / ед.</p>
+                        ) : <p className="text-[20px] text-[#7000ff] font-[500]"><span>{prettify(price * count)}</span> руб / ед.</p>
                     }
                 </div>
                 <div className="flex flex-col gap-[10px]">
@@ -75,9 +106,9 @@ const ProductPage = () => {
                         <p className="text-[14px]">Количество:</p>
                         <div className="flex items-center gap-[10px]">
                             <div className="flex items-center h-[35px] w-[120px] rounded-[4px] borderFul cursor-pointer px-[10px]">
-                                <div className="w-[14px] h-[2px] bg-[#00000050]"></div>
-                                <p className="text-[14px] mx-auto">1</p>
-                                <div className="relative h-full w-[14px] flex items-center">
+                                <div onClick={decrement} className="w-[14px] h-[2px] bg-[#00000050]"></div>
+                                <p className="text-[14px] mx-auto">{count}</p>
+                                <div onClick={increment} className="relative h-full w-[14px] flex items-center">
                                 <div className="w-[14px] h-[2px] bg-[#000000]"></div>
                                 <div className="w-[14px] h-[2px] bg-[#000000] absolute rotate"></div>
                                 </div>
@@ -92,7 +123,7 @@ const ProductPage = () => {
                          </div>
                             <p className="text-[12.25px] font-[500]">в рассрочку</p>
                         </div>
-                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 14C18 14.3672 17.8013 14.4996 17.5508 14.7305L11.5 20.3242C11.3032 20.5195 11.1211 20.75 10.7266 20.75C10.4492 20.75 10 20.5352 10 19.9492C10 19.5859 10.2942 19.4151 10.5 19.2109L16.1172 14L10.4922 8.78125C10.2954 8.57705 9.99609 8.42578 9.99609 8C9.99609 7.66406 10.2578 7.25 10.793 7.25C11.0882 7.25 11.3579 7.52734 11.5547 7.72266L17.5508 13.25C17.8013 13.4897 18 13.6328 18 14Z" className="fill-[#76797F] hover:fill-[#000]" fill-opacity="0.6"></path></svg>
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 14C18 14.3672 17.8013 14.4996 17.5508 14.7305L11.5 20.3242C11.3032 20.5195 11.1211 20.75 10.7266 20.75C10.4492 20.75 10 20.5352 10 19.9492C10 19.5859 10.2942 19.4151 10.5 19.2109L16.1172 14L10.4922 8.78125C10.2954 8.57705 9.99609 8.42578 9.99609 8C9.99609 7.66406 10.2578 7.25 10.793 7.25C11.0882 7.25 11.3579 7.52734 11.5547 7.72266L17.5508 13.25C17.8013 13.4897 18 13.6328 18 14Z" className="fill-[#76797F] hover:fill-[#000]" fillOpacity="0.6"></path></svg>
                     </div>
                     <div className="w-full py-[9px] rounded-[8px] flex items-center justify-center px-[16px] bg-[#ffe4334d]">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M14 4.5C12.2402 4.5 11 5.88779 11 7.5H17C17 5.88779 15.7598 4.5 14 4.5ZM9.5 11.5V9H7.5V14.25C7.5 14.6642 7.16421 15 6.75 15C6.33578 15 6 14.6642 6 14.25V8.25V7.5H6.75H9.5C9.5 5.11221 11.3598 3 14 3C16.6402 3 18.5 5.11221 18.5 7.5H21.25H22V8.25V21.75C22 22.9926 20.9926 24 19.75 24H15.25C14.8358 24 14.5 23.6642 14.5 23.25C14.5 22.8358 14.8358 22.5 15.25 22.5H19.75C20.1642 22.5 20.5 22.1642 20.5 21.75V9H18.5V11.5H17V9H11V11.5H9.5ZM14.2738 18.0323C14.5667 17.7395 14.5667 17.2646 14.2738 16.9717C13.9809 16.6788 13.506 16.6788 13.2131 16.9717L7.99548 22.1893L5.78034 19.9742C5.48744 19.6813 5.01257 19.6813 4.71967 19.9741C4.42678 20.267 4.42677 20.7419 4.71966 21.0348L7.46513 23.7803C7.60579 23.921 7.79655 24 7.99547 24C8.19438 24 8.38515 23.921 8.5258 23.7803L14.2738 18.0323Z" fill="#141415"></path></svg>
@@ -110,12 +141,13 @@ const ProductPage = () => {
             </div>
             <p className="text-[11px] my-[20px]">{description}</p>
             <p className="text-[17.5px] font-[600] my-[14px]">Похожие товары</p>
-            <SwiperProduct/>
-
+            <SwiperProduct type={type}/>
             <div className="w-full footerShadow h-[56px] px-[6px] bg-[#fff] fixed bottom-0 left-0 z-40 flex items-center justify-between">
                 <div className="w-fit">
                     <p className="text-[8.75px]">Цена общая</p>
-                    <p className="text-[15.75px] font-[500] leading-[15px]"><span>8000</span> руб</p>
+                    {
+                        salePercentage !== 0 ? <p className="text-[15.75px] font-[500] leading-[15px]"><span>{prettify(salePrice * count)}</span> руб</p> : <p className="text-[15.75px] font-[500] leading-[15px]"><span>{prettify(price * count)}</span> руб</p>
+                    } 
                 </div>
                 <div className="flex items-center gap-[20px] w-[50%]">
                 <img src="../../public/images/heart.png" className="w-[20px] duration-[300ms] h-[20px] hover:invert-[70%]" alt="" />

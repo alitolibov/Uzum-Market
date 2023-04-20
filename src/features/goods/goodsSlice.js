@@ -954,8 +954,19 @@ export const goodsSlice = createSlice({
     reducers: {
         getGoods: (state, action) => {
             state.data = state.data
+        },
+        setGoods: (state, action) => {
+            let liked = state.data.filter(item => {
+                if(item.id === action.payload) {
+                    item.isBlackFriday ? item.isBlackFriday = false : item.isBlackFriday = true 
+                }
+                return item
+            })
+            console.log(liked);
         }
     }
 })
 
 export default goodsSlice.reducer
+
+export const {setGoods} = goodsSlice.actions

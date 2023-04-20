@@ -1,4 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addLiked } from "../features/liked/likedSlice";
 
 const Item = ({item}) => {
 
@@ -8,13 +10,19 @@ const Item = ({item}) => {
     }
 
     let price = prettify(item.price) 
+    let dispatch = useDispatch()
+
     
     let salePrice = Math.round(item.price ? item.price - (item.price / 100 * item?.salePercentage) : null)
     let salePrices = Math.round(item.price ? item.price / 12 : null)
+    const likedID = useSelector(state => state.liked.data)
+    // console.log(likedID);
     return ( 
     <Link to={'/product/' + item?.id} className="rounded-[8px] cursor-pointer hoverBlock overflow-hidden duration-[250ms] min-w-[140px] h-fit">
         <div className="relative duration-[250ms] overflow-hidden bg-[#fff] mb-[10px]">
-            <img src="../../public/images/heart.png" className="w-[20px] duration-[300ms] h-[20px] absolute right-[10px] top-[10px] z-[10] hover:invert-[70%]" alt="" />
+            {
+                likedID.filter(el => el === item.id ? console.log(item) : null)
+            }
             <div className="w-full aspectImg duration-[250ms] bg-center bg-no-repeat cover" style={{backgroundImage: `url('${item?.media[0]}')`}}></div>
             {
                 item?.salePercentage !== 0 ? (
