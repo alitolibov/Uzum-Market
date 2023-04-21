@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import '../index.css'
 
 // import required modules
-import { Navigation } from "swiper";
+import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from "swiper";
 import Item from "./Item";
 import { useSelector } from "react-redux";
 
@@ -25,7 +25,6 @@ export default function SwiperProduct({type}) {
             <Swiper
         slidesPerView={viewport_width < 592 ? 2 : 3}
         spaceBetween={8}
-        // modules={[Pagination]}
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
         {
@@ -36,7 +35,10 @@ export default function SwiperProduct({type}) {
         <Swiper
         slidesPerView={viewport_width < 1200 ? 4 : 5}
         spaceBetween={8}
-        // modules={[Pagination]}
+        navigation={true}
+        pagination={true}
+        keyboard={true}
+        modules={[Navigation, Mousewheel, Keyboard]}
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
         {

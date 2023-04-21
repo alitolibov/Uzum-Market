@@ -35,7 +35,7 @@ const ProductPage = () => {
     return ( 
     <div>
         <div className="flex relative flex-col gap-[25px] h-fit mt-[20px] tab:flex-row tab:gap-[0] tab:justify-between">
-            <div className="flex gap-[8px] overflow-hidden aspectSwiperBlock w-full tab:max-w-[42%] tab:h-fit tab:sticky tab:top-0 tab:bottom-0">
+            <div className="flex gap-[8px] overflow-hidden aspectSwiperBlock w-full tab:max-w-[42%] tab:h-fit tab:sticky tab:top-0 tab:bottom-0 tab:z-30">
                 <div className="w-[17%] h-auto max-h-full flex flex-col gap-[8px]">
                     {
                         
