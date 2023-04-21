@@ -32,7 +32,7 @@ export default function SwiperProduct({type}) {
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
         {
-            pathname !== '/liked' ? arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>) : popularity.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
+            pathname !== '/liked' && pathname !== '/cart' ? arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>) : popularity.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
         }
       </Swiper>
         ) :
@@ -46,7 +46,7 @@ export default function SwiperProduct({type}) {
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
         {
-             pathname !== '/liked' ? arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>) : popularity.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
+             pathname !== '/liked' && pathname !== '/cart' ? arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>) : popularity.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
         }
       </Swiper>
       }
