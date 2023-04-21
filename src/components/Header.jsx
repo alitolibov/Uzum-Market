@@ -94,11 +94,11 @@ const Header = () => {
 					
 					<div className="flex items-center">
 						<div className="flex items-center gap-[5px] duration-[300ms] py-[9px] rounded-[8px] px-[10px] hover:bg-[#76797f1a] cursor-pointer">
-						<div className='w-[22px] h-[22px] cursor-pointer bg-cover bg-chel'></div>
+						<div className='w-[22px] h-[22px] cursor-pointer bg-cover' style={{backgroundImage: 'url("../../public/images/chel.png")'}}></div>
 						<p className="text-[14px] font-[500] text-center hidden lg:block">Войти</p>
 						</div>
 					<div className="flex items-center gap-[5px] cursor-pointer duration-[300ms] py-[9px] rounded-[8px] px-[10px] hover:bg-[#76797f1a]">
-					<div className='w-[22px] h-[22px] cursor-pointer bg-cover bg-like'></div>
+					<div className='w-[22px] h-[22px] cursor-pointer bg-cover' style={{backgroundImage: 'url("../../public/images/like.png")'}}></div>
 					<p className="text-[14px] font-[500] text-center hidden lg:block">Избранное</p>
 					</div>
 					<div className="flex items-center gap-[5px] cursor-pointer duration-[300ms] py-[9px] rounded-[8px] px-[10px] hover:bg-[#76797f1a]">

@@ -12,10 +12,14 @@ import '../index.css'
 import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay } from "swiper";
 import Item from "./Item";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 export default function SwiperProduct({type}) {
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     let data = useSelector(state => state.goods.data)
+    let {pathname} = useLocation()
+    let popularity = data
+    popularity = [...popularity].sort((a, b) => a.rating - b.rating).reverse().slice(0, 10);
     let arrType = data.filter(item => item.type === type)
   return (
     <div>
@@ -28,7 +32,7 @@ export default function SwiperProduct({type}) {
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
         {
-            arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
+            pathname !== '/liked' ? arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>) : popularity.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
         }
       </Swiper>
         ) :
@@ -42,7 +46,7 @@ export default function SwiperProduct({type}) {
         className="mySwiper w-full overflow-hidden rounded-[12px] mb-[48px]"
       >
         {
-            arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
+             pathname !== '/liked' ? arrType.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>) : popularity.map((el,index) => <SwiperSlide key={index}><Item item={el}/></SwiperSlide>)
         }
       </Swiper>
       }

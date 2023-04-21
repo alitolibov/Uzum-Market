@@ -12,7 +12,14 @@
   font-family: 'Roboto', sans-serif;
   user-select: none;
 }
-
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  width: 100px;
+  height: 100px;
+}
 .css-uttm9k:hover, .css-uttm9k[data-hover] {
   background-color: white !important;
 }

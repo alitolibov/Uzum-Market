@@ -1,14 +1,16 @@
 import { Key } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useSwiper } from "swiper/react";
 import Img from "../components/Img";
 import SwiperProduct from "../components/SwiperProduct";
 import SwiperProductMobile from "../components/SwiperProductMobile";
+import { cursorCTX } from "../context/cursorCTX";
 
 
 const ProductPage = () => {
+    let {cursor} = useContext(cursorCTX)
     let data = useSelector(state => state.goods.data)
     let {pathname} = useLocation()
     let ids = pathname.split('/').at(-1)
@@ -32,9 +34,83 @@ const ProductPage = () => {
             setCount(count - 1)
         }
     }
+    function magnify(imgIDs, zoom) {
+        imgIDs.forEach(el => {
+            el.onmouseenter = () => {
+        var img, glass, w, h, bw;
+        if(el.firstChild.classList.contains('img-magnifier-glass')) {
+            let divs = document.querySelectorAll('.img-magnifier-glass')
+            divs.forEach(item => item.classList.remove('img-magnifier-glass'))
+            img = el.lastChild
+        } else {
+            let divs = document.querySelectorAll('.img-magnifier-glass')
+            divs.forEach(item => item.classList.remove('img-magnifier-glass'))
+            img = el.firstChild
+        }
+      
+        // Создать увеличительное стекло: */
+         glass = document.createElement("DIV");
+         glass.setAttribute("class", "img-magnifier-glass");
+
+        
+      
+        /* Вставить увеличительное стекло: */
+        img.parentElement.insertBefore(glass, img);
+      
+        /* Установите свойства фона для стекла лупы: */
+        glass.style.backgroundImage = "url('" + img.src + "')";
+        glass.style.backgroundRepeat = "no-repeat";
+        glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+        bw = 3;
+        w = glass.offsetWidth / 2;
+        h = glass.offsetHeight / 2;
+      
+        /* Выполните функцию, когда кто-то перемещает лупу по изображению: */
+        glass.addEventListener("mousemove", moveMagnifier);
+        img.addEventListener("mousemove", moveMagnifier);
+      
+        /* а также для сенсорных экранов: */
+        glass.addEventListener("touchmove", moveMagnifier);
+        img.addEventListener("touchmove", moveMagnifier);
+        function moveMagnifier(e) {
+          var pos, x, y;
+          /* Предотвратите любые другие действия, которые могут возникнуть при перемещении по изображению */
+          e.preventDefault();
+          /* Получить позиции курсора x и y: */
+          pos = getCursorPos(e);
+          x = pos.x;
+          y = pos.y;
+          /* Не допускайте, чтобы лупа находилась вне изображения: */
+          if (x > img.width - (w / zoom)) {x = img.width - (w / zoom);}
+          if (x < w / zoom) {x = w / zoom;}
+          if (y > img.height - (h / zoom)) {y = img.height - (h / zoom);}
+          if (y < h / zoom) {y = h / zoom;}
+          /* Установите положение стекла лупы: */
+          glass.style.left = (x - w) + "px";
+          glass.style.top = (y - h) + "px";
+          /* Покажите, что такое увеличительное стекло "смотреть": */
+          glass.style.backgroundPosition = "-" + ((x * zoom) - w + bw) + "px -" + ((y * zoom) - h + bw) + "px";
+        }
+      
+        function getCursorPos(e) {
+          var a, x = 0, y = 0;
+          e = e || window.event;
+          /* Получить x и y позиции изображения: */
+          a = img.getBoundingClientRect();
+          /* Вычислите координаты курсора x и y относительно изображения: */
+          x = e.pageX - a.left;
+          y = e.pageY - a.top;
+          /* Consider any page scrolling: */
+          x = x - window.pageXOffset;
+          y = y - window.pageYOffset;
+          return {x : x, y : y};
+        }
+            }
+        });
+      }
     return ( 
     <div>
-        <div className="flex relative flex-col gap-[25px] h-fit mt-[20px] tab:flex-row tab:gap-[0] tab:justify-between">
+        <div className="img-magnifier-container flex relative flex-col gap-[25px] h-fit mt-[20px] tab:flex-row tab:gap-[0] tab:justify-between">
             <div className="flex gap-[8px] overflow-hidden aspectSwiperBlock w-full tab:max-w-[42%] tab:h-fit tab:sticky tab:top-0 tab:bottom-0 tab:z-30">
                 <div className="w-[17%] h-auto max-h-full flex flex-col gap-[8px]">
                     {
@@ -42,7 +118,7 @@ const ProductPage = () => {
                         media.map((item, idx) => <Img key={idx} item={item}/>)
                     }
                 </div>
-                <SwiperProductMobile media={media}/>
+                <SwiperProductMobile media={media} fn={magnify}/>
             </div>
             <div className="tab:w-[55%] tab:px-[25px]">
                 <div className="flex flex-col gap-[12px]">
@@ -85,13 +161,10 @@ const ProductPage = () => {
                     <div className="flex flex-col gap-[8px]">
                         <p className="text-[14px]">Количество:</p>
                         <div className="flex items-center gap-[10px]">
-                            <div className="flex items-center h-[35px] w-[120px] rounded-[4px] borderFul cursor-pointer px-[10px]">
-                                <div onClick={decrement} className="w-[14px] h-[2px] bg-[#00000050]"></div>
+                            <div className="flex items-center h-[35px] gap-[20px] rounded-[4px] borderFul cursor-pointer px-[10px]">
+                                <p className="text-[50px] leading-[0px] font-[200]" style={{color: count !== 1 ? '#000000' : "#00000050"}} onClick={decrement}>-</p>
                                 <p className="text-[14px] mx-auto">{count}</p>
-                                <div onClick={increment} className="relative h-full w-[14px] flex items-center">
-                                <div className="w-[14px] h-[2px] bg-[#000000]"></div>
-                                <div className="w-[14px] h-[2px] bg-[#000000] absolute rotate"></div>
-                                </div>
+                                <p className="text-[23px] font-[300]" onClick={increment}>+</p>
                             </div>
                         <p className="text-[14px] text-[#00c853]">В наличии 999</p>
                         </div>
