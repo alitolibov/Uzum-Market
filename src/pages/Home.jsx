@@ -80,6 +80,9 @@ const Home = () => {
       </Swiper>
         ) : <SwiperBig/>
     }
+    {/* bg-[#f5f6f7] */}
+                    {/* text-[#a6a9b3] */}
+                    {/* dispatch(addGood({id: id, item: itemProduct, qt: count})) */}
     <p className="text-[16px] font-[600] my-[14px] md:text-[28px]">Для геймеров</p>
     <div className="grid grid-cols-2 gap-[8px] gap-y-[15px] auto mdx:grid-cols-3 lgx:grid-cols-4 lg:grid-cols-5 md:gap-x-[20px] md:gap-y-[32px] ">
         {
