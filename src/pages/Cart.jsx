@@ -4,8 +4,7 @@ import CartItem from "../components/CartItem";
 import SwiperProduct from "../components/SwiperProduct";
 
 const Cart = () => {
-    const data = useSelector(state => state.goods.data)
-    const liked = useSelector(state => state.liked.data)
+    const data = useSelector(state => state.cart.data)
     let date = new Date()
     date.setDate(new Date().getDate() + 1)
     let tomorrow = date
@@ -13,7 +12,7 @@ const Cart = () => {
     return ( 
     <div>
        {
-        liked.length === 0 ? (
+        data.length === 0 ? (
             <div className="flex flex-col gap-[16px] items-center py-[40px] w-[95%] mx-auto">
        <img  src="https://uzum.uz/static/img/shopocat.8cee444.png" className="w-[128px] h-[128px]"/>
        <div className="flex flex-col items-center">
@@ -24,7 +23,7 @@ const Cart = () => {
        </div>
         ) : (
             <>
-            <p className="mt-[10px] text-[15.75px] font-[500] md:text-[24px]">Ваша корзина, <span className="text-[#00000075]">1 товар</span></p>
+            <p className="mt-[10px] text-[15.75px] font-[500] md:text-[24px]">Ваша корзина, <span className="text-[#00000075]">{data.length} товар</span></p>
             <div className="mt-[10px] lg:flex lg:gap-[12px]">
                 <div className="lg:w-[76%] lg:border lg:px-[16px] lg:py-[16px]">
                 <hr className="my-[15px] lg:hidden"/>
@@ -33,7 +32,9 @@ const Cart = () => {
                     <p className="text-[10.5px] text-[#7000ff] font-[500] text-center md:text-[12px] lg:text-start">{day} апреля (Завтра)</p>
                 </div>
                 <hr className="mt-[7px] mb-[14px] md:mt-[14px] md:mb-[21px]"/>
-                <CartItem/>
+                {
+                    data.map(item => <CartItem key={item.id} item={item}/>)
+                }
                 </div>
                 <hr className="mt-[14px] mb-[7px] md:mt-[21px] md:mb-[14px]"/>
                 <div className="mt-[10px] shadowCart px-[15px] py-[15px] flex flex-col gap-[15px] md:mt-[20px] lg:w-[22%] lg:mt-0 lg:h-fit lg:rounded-[8px]">
