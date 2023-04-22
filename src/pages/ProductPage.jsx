@@ -171,7 +171,7 @@ const ProductPage = () => {
                         <p className="text-[14px] mt-[20px] hidden tab:block">Цена:</p>
                         <div className="hidden items-end gap-[22px] tab:flex">
                         <p className="text-[20px] font-[500]"><span>{prettify(salePrice * count)}</span> руб / ед.</p>
-                        <p className="text-[14px] text-[#757575] line-through"><span>{prettify(price)}</span> руб</p>
+                        <p className="text-[14px] text-[#757575] line-through"><span>{prettify(price * count)}</span> руб</p>
                         <div className="w-[50px] rounded-[4px] h-[21px] bg-[#5000aa] hidden items-center justify-center tab:flex">
                         <p className="text-[13px] text-[#fff]">Акция</p>
                         </div>

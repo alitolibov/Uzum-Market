@@ -35,6 +35,13 @@
 input{
   all: unset;
 }
+.purpleBorder{
+  color: #7000ff;
+  border: 1px solid #7000ff;
+}
+.shadowCart {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
 
 .borderBottom{
   border-bottom: 1px solid #00000015;
