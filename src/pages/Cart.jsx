@@ -23,34 +23,38 @@ const Cart = () => {
        <Link to={'/'} className="bg-[#6e00ff] duration-[300ms] cursor-pointer hover:bg-[#6f00ff] font-[500] px-[14px] py-[7px] text-[12.25px] md:text-[14px] text-[#fff] rounded-[4px]">На главную</Link>
        </div>
         ) : (
-            <div className="mt-[10px]">
-                <p className="text-[15.75px] font-[500] md:text-[24px]">Ваша корзина, <span className="text-[#00000075]">1 товар</span></p>
-                <hr className="my-[15px]"/>
-                <div className="w-full py-[4px] flex-col items-center justify-center bg-[#00000006] rounded-[2px] ">
-                    <p className="text-[10.5px] text-[#757575] text-center font-[500] md:text-[12px]">Ближайшая дата доставки:</p>
-                    <p className="text-[10.5px] text-[#7000ff] font-[500] text-center md:text-[12px]">{day} апреля (Завтра)</p>
+            <>
+            <p className="mt-[10px] text-[15.75px] font-[500] md:text-[24px]">Ваша корзина, <span className="text-[#00000075]">1 товар</span></p>
+            <div className="mt-[10px] lg:flex lg:gap-[12px]">
+                <div className="lg:w-[76%] lg:border lg:px-[16px] lg:py-[16px]">
+                <hr className="my-[15px] lg:hidden"/>
+                <div className="w-full py-[4px] flex-row justify-center bg-[#00000006] rounded-[2px] lg:flex lg:gap-[10px] lg:bg-[transparent] lg:justify-start">
+                    <p className="text-[10.5px] text-[#757575] text-center font-[500] md:text-[12px] lg:text-start">Ближайшая дата доставки:</p>
+                    <p className="text-[10.5px] text-[#7000ff] font-[500] text-center md:text-[12px] lg:text-start">{day} апреля (Завтра)</p>
                 </div>
-                <hr className="mt-[7px] mb-[14px]"/>
+                <hr className="mt-[7px] mb-[14px] md:mt-[14px] md:mb-[21px]"/>
                 <CartItem/>
-                <hr className="mt-[14px] mb-[7px]"/>
-                <div className="mt-[10px] shadowCart px-[15px] py-[15px] flex flex-col gap-[15px]">
+                </div>
+                <hr className="mt-[14px] mb-[7px] md:mt-[21px] md:mb-[14px]"/>
+                <div className="mt-[10px] shadowCart px-[15px] py-[15px] flex flex-col gap-[15px] md:mt-[20px] lg:w-[22%] lg:mt-0 lg:h-fit lg:rounded-[8px]">
                     <p className="text-[15.75px] text-[#212121] font-[500]">Ваш заказ</p>
                     <div className="flex items-center justify-between">
                         <p className="text-[14px]">Товары: <span>(1)</span></p>
                         <p className="text-[14px]">13 000<span> руб</span></p>
                     </div>
                     <div className="purpleBorder flex items-center justify-center py-[2px]">
-                    <p className="text-[10.5px] text-[#7000ff] font-[500] text-center">{day} апреля (Завтра)</p>
+                    <p className="text-[10.5px] text-[#7000ff] font-[500] text-center md:text-[12px]">{day} апреля (Завтра)</p>
                     </div>
                     <div className="flex items-center justify-between">
                         <p className="text-[14px]">Итого:</p>
                         <div className="flex flex-col items-end">
-                        <p className="text-[13.75px] font-[500]">13 000<span> руб</span></p>
-                        <p className="text-[10.5px] text-[#00c853]">Вы экономите: <span>3 000</span> руб</p>
+                        <p className="text-[13.75px] font-[500] md:text-[20px]">13 000<span> руб</span></p>
+                        <p className="text-[10.5px] text-[#00c853] md:text-[12px]">Вы экономите: <span>3 000</span> руб</p>
                         </div>
                     </div>
                 </div>
             </div>
+            </>
         )
        }
        <p className="text-[17.5px] font-[500] mt-[55px] mb-[20px] tab:text-[19.8px] tab:mt-[25px] md:text-[23.2px] md:mt-[35px]">Популярные товары</p>
