@@ -5,6 +5,8 @@ import SwiperProduct from "../components/SwiperProduct";
 
 const Cart = () => {
     const data = useSelector(state => state.cart.data)
+    const total = useSelector(state => state.cart.total)
+    console.log(total);
     let date = new Date()
     date.setDate(new Date().getDate() + 1)
     let tomorrow = date
