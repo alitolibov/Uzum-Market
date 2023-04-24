@@ -200,10 +200,10 @@ const ProductPage = () => {
                         <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 14C18 14.3672 17.8013 14.4996 17.5508 14.7305L11.5 20.3242C11.3032 20.5195 11.1211 20.75 10.7266 20.75C10.4492 20.75 10 20.5352 10 19.9492C10 19.5859 10.2942 19.4151 10.5 19.2109L16.1172 14L10.4922 8.78125C10.2954 8.57705 9.99609 8.42578 9.99609 8C9.99609 7.66406 10.2578 7.25 10.793 7.25C11.0882 7.25 11.3579 7.52734 11.5547 7.72266L17.5508 13.25C17.8013 13.4897 18 13.6328 18 14Z" className="fill-[#76797F] hover:fill-[#000]" fillOpacity="0.6"></path></svg>
                     </div>
                     {
-                        !cartData.includes(id) ? 
-                        <button onClick={() => dispatch(removeGood(itemProduct))} className="text-[16px] bg-[#7000ff] duration-[300ms] hover:bg-[#7614f7] font-[500] cursor-pointer rounded-[10px] text-[#fff] py-[10px] w-[100%] hidden tab:block">Добавить в корзину</button>
+                        cartData.includes(id) ? 
+                        <button onClick={() => dispatch(removeGood(itemProduct))} className="text-[16px] bg-[#f5f6f7] duration-[300ms] font-[500] cursor-pointer rounded-[10px] text-[#a6a9b3]  py-[10px] w-[100%] hidden tab:block">Добавить в корзину</button>
                          : (
-                            <button onClick={() => dispatch(addGood({id: id, item: itemProduct, qt: count}))} className="text-[16px] bg-[#f5f6f7] duration-[300ms] font-[500] cursor-pointer rounded-[10px] text-[#a6a9b3] py-[10px] w-[100%] hidden tab:block">Добавить в корзину</button>
+                        <button onClick={() => dispatch(addGood({id: id, item: itemProduct, qt: count}))} className="text-[16px] bg-[#7000ff] hover:bg-[#7614f7] duration-[300ms] text-[#fff] font-[500] cursor-pointer rounded-[10px] py-[10px] w-[100%] hidden tab:block">Добавить в корзину</button>
                         )
                     }
                     <div className="w-full py-[9px] rounded-[8px] flex items-center justify-center px-[16px] bg-[#ffe4334d] tab:mb-[30px]">

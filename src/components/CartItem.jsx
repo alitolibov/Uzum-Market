@@ -60,7 +60,7 @@ const CartItem = ({item}) => {
         <div className="flex items-center h-[35px] gap-[20px] rounded-[4px] borderFul cursor-pointer px-[10px] absolute left-0 top-[50%] translate-y-[-50%]">
             <p className="text-[50px] leading-[0px] font-[200]" style={{color: item?.qt !== 1 ? '#000000' : "#00000050"}} onClick={() => dispatch(decrement(item))}>-</p>
             <p className="text-[14px] mx-auto">{item?.qt}</p>
-            <p className="text-[23px] font-[300]" onClick={() => dispatch(increment(item))}>+</p>
+            <p className="text-[23px] font-[300] leading-[50px]" onClick={() => dispatch(increment(item))}>+</p>
         </div>
         <div className="flex justify-end">
         <div className="float-right w-fit flex flex-col items-end gap-[7px]">
@@ -70,7 +70,7 @@ const CartItem = ({item}) => {
         </svg>
         <p className="text-[#757575] md:text-[12px]">Удалить</p>
         </div>
-            {item.salePercentage !== 0 ? <p className="font-[500] text-[20px]">{prettify(item.price * item?.qt)}<span> руб</span></p> : <p className="font-[500] text-[20px]">{prettify(salePrice * item?.qt)}<span> руб</span></p>}
+            {item.salePercentage !== 0 ? <p className="font-[500] text-[20px]">{prettify(salePrice * item?.qt)}<span> руб</span></p> : <p className="font-[500] text-[20px]">{prettify(item.price * item?.qt)}<span> руб</span></p>}
             {item.salePercentage !== 0 ? <p className="text-[#757575] line-through md:text-[14px]">{prettify(item.price * item?.qt)}</p> : null}
         </div>
         </div>

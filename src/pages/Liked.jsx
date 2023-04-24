@@ -4,6 +4,7 @@ import SwiperProduct from "../components/SwiperProduct";
 
 const Liked = () => {
     const liked = useSelector(state => state.liked.data)
+    console.log(liked);
     return ( 
     <div>
       {

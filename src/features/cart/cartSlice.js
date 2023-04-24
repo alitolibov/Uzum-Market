@@ -4,6 +4,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     data: JSON.parse(localStorage.getItem('cart')) || [],
     data_id: JSON.parse(localStorage.getItem('cart_id')) || [],
+    total: JSON.parse(localStorage.getItem('total')) || 0,
+    prices: JSON.parse(localStorage.getItem('prices')) || [],
 }
 
 export const cartSlice = createSlice({
@@ -14,6 +16,8 @@ export const cartSlice = createSlice({
             if(state.data_id.includes(payload.id)) {
                 state.data = state.data.filter(item => item.id !== payload.id)
                 state.data_id = state.data_id.filter(item => item !== payload.id)
+                state.prices = state.prices.filter(el => el !== Math.round(payload.item.price - (payload.item.price / 100 * payload.item?.salePercentage)) * +payload.qt)
+                localStorage.setItem('prices', JSON.stringify(state.prices))
                 localStorage.setItem('cart', JSON.stringify(state.data))
                 localStorage.setItem('cart_id', JSON.stringify(state.data_id))
             } else {
@@ -21,12 +25,15 @@ export const cartSlice = createSlice({
                 state.data_id = [...state.data_id, payload.id]
                 localStorage.setItem('cart', JSON.stringify(state.data))
                 localStorage.setItem('cart_id', JSON.stringify(state.data_id))
-                
+                state.prices = [...state.prices, Math.round(payload.item.price - (payload.item.price / 100 * payload.item?.salePercentage)) * +payload.qt]
+                localStorage.setItem('prices', JSON.stringify(state.prices))
             }
         },
         removeGood: (state, {payload}) => {
             state.data = state.data.filter(item => item.id !== payload.id)
             state.data_id = [...state.data_id, payload.id]
+            state.prices = state.prices.filter(el => el !== Math.round(payload.price - (payload.price / 100 * payload?.salePercentage)) * +payload.qt)
+            localStorage.setItem('prices', JSON.stringify(state.prices))
             localStorage.setItem('cart', JSON.stringify(state.data))
             localStorage.setItem('cart_id', JSON.stringify(state.data_id))
         },
@@ -36,6 +43,7 @@ export const cartSlice = createSlice({
                     item.qt++
                 }
             })
+            localStorage.setItem('cart', JSON.stringify(state.data))
         },
         decrement: (state, {payload}) => {
             state.data.filter(item => {
@@ -45,7 +53,8 @@ export const cartSlice = createSlice({
                     }
                 }
             })
-        }
+            localStorage.setItem('cart', JSON.stringify(state.data))
+        },
     }
 })
 

@@ -1,12 +1,26 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import SwiperProduct from "../components/SwiperProduct";
 
 const Cart = () => {
     const data = useSelector(state => state.cart.data)
-    const total = useSelector(state => state.cart.total)
+    // const total = useSelector(state => state.cart.prices)
+    const total = useSelector(state => state.cart.prices)
     console.log(total);
+    let totalPrice = total.reduce((a, b) => a + b, 0)
+    function prettify(num) {
+        var n = num.toString();
+        return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
+    }
+
+    let price = prettify(totalPrice) 
+    let dispatch = useDispatch()
+
+
+    
+    // let salePrice = Math.round(item.price ? item.price - (item.price / 100 * item?.salePercentage) : null)
+    // let salePrices = Math.round(item.price ? item.price / 12 : null)
     let date = new Date()
     date.setDate(new Date().getDate() + 1)
     let tomorrow = date
@@ -51,7 +65,7 @@ const Cart = () => {
                     <div className="flex items-center justify-between">
                         <p className="text-[14px]">Итого:</p>
                         <div className="flex flex-col items-end">
-                        <p className="text-[13.75px] font-[500] md:text-[20px]">13 000<span> руб</span></p>
+                        <p className="text-[13.75px] font-[500] md:text-[20px]">{price}<span> руб</span></p>
                         <p className="text-[10.5px] text-[#00c853] md:text-[12px]">Вы экономите: <span>3 000</span> руб</p>
                         </div>
                     </div>

@@ -31,8 +31,8 @@ const Header = () => {
 		span.innerHTML = select.value
 	}
 
-	const likedID = useSelector(state => state.liked.data_id)
-    const cartData = useSelector(state => state.cart.data_id)
+	const likedID = useSelector(state => state.liked.data)
+    const cartData = useSelector(state => state.cart.data)
 
 
 	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
