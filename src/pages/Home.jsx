@@ -4,22 +4,34 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay} from "swiper";
 import SwiperBig from "../components/SwiperBig";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Item from "../components/Item";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { getGoods } from "../features/goods/thunk";
 
 const Home = () => {
+    const [arr, setArr] = useState([])
+    let dispatch = useDispatch()
     const {status, data} = useSelector((state) => state.goods)
-    console.log(status, data);
+    useEffect(() => {
+		if(!data.length) {
+			dispatch(getGoods())
+		}
+	}, []);
+    useEffect(() => {
+		if (data.length !== 0) {
+			setArr(data);
+		}
+	}, [data]);
 
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
 
     const [count, setCount] = useState(viewport_width < 1300 ? 12 : 10)
     const [countTex, setCountTex] = useState(viewport_width < 1300 ? 12 : 10)
-    let arrGame = data.filter(item => item.type === 'furniture' || item.type === "PC")
-    let arrTex = data.filter(item => item.type === 'kitchen' || item.type === "audio")
+    let arrGame = arr.filter(item => item.type === 'furniture' || item.type === "PC")
+    let arrTex = arr.filter(item => item.type === 'kitchen' || item.type === "audio")
 
     const countGameFn = () => {
         if(viewport_width < 1300) {

@@ -942,5 +942,7 @@
               ],
               "type": "kitchen"
             }
-          ]
+          ],
+          "liked" : [],
+          "basket": []
     }
