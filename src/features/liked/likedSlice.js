@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getLiked } from "./thunk"
+import { deleteLiked, getLiked, postLiked } from "./thunk"
 
 const initialState = {
-    data: JSON.parse(localStorage.getItem('liked')) || [],
-    data_id: JSON.parse(localStorage.getItem('liked_id')) || []
+    data: [],
+    data_id: []
 }
 
 export const likedSlice = createSlice({
@@ -36,7 +36,32 @@ export const likedSlice = createSlice({
       .addCase(getLiked.rejected, (state, action) => {
         state.status = 'rejected'
       })
-  
+      .addCase(postLiked.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(postLiked.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.data = [...state.data, action.payload]
+        state.data_id = [...state.data_id, action.payload.id]
+        console.log(state.data_id);
+        state.status = 'fulfilled'
+      })
+      .addCase(postLiked.rejected, (state, action) => {
+        state.status = 'rejected'
+      })
+      .addCase(deleteLiked.pending, (state, action) => {
+        state.status = "loading"
+      })
+      .addCase(deleteLiked.fulfilled, (state, action) => {
+        state.data = [...state.data, action.payload]
+        // state.data_id = []
+        // state.data_id = [...state.data_id, action.payload.id]
+        console.log(state.data);
+        state.status = 'fulfilled'
+      })
+      .addCase(deleteLiked.rejected, (state, action) => {
+        state.status = 'rejected'
+      })
     }
 })
 
