@@ -8,7 +8,9 @@ const Cart = () => {
     // const total = useSelector(state => state.cart.prices)
     const total = useSelector(state => state.cart.prices)
     console.log(total);
-    let totalPrice = total.reduce((a, b) => a + b, 0)
+    let allPrices = []
+    total.filter(item => allPrices.push(item.price))
+    let totalPrice = allPrices.reduce((a, b) => a + b, 0)
     function prettify(num) {
         var n = num.toString();
         return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');

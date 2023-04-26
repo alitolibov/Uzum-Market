@@ -7,9 +7,12 @@ import SwiperBig from "../components/SwiperBig";
 import { useSelector } from "react-redux";
 import Item from "../components/Item";
 import { useState } from "react";
+import axios from "axios";
 
 const Home = () => {
-    const data = useSelector(state => state.goods.data)
+    const {status, data} = useSelector((state) => state.goods)
+    console.log(status, data);
+
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
 

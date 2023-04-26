@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
             if(state.data_id.includes(payload.id)) {
                 state.data = state.data.filter(item => item.id !== payload.id)
                 state.data_id = state.data_id.filter(item => item !== payload.id)
-                state.prices = state.prices.filter(el => el !== Math.round(payload.item.price - (payload.item.price / 100 * payload.item?.salePercentage)) * +payload.qt)
+                state.prices = state.prices.filter(el => el.id !== payload.id)
                 localStorage.setItem('prices', JSON.stringify(state.prices))
                 localStorage.setItem('cart', JSON.stringify(state.data))
                 localStorage.setItem('cart_id', JSON.stringify(state.data_id))
@@ -25,14 +25,14 @@ export const cartSlice = createSlice({
                 state.data_id = [...state.data_id, payload.id]
                 localStorage.setItem('cart', JSON.stringify(state.data))
                 localStorage.setItem('cart_id', JSON.stringify(state.data_id))
-                state.prices = [...state.prices, Math.round(payload.item.price - (payload.item.price / 100 * payload.item?.salePercentage)) * +payload.qt]
+                state.prices = [...state.prices, {id: payload.id, price: Math.round(payload.item.price - (payload.item.price / 100 * payload.item?.salePercentage)) * +payload.qt}]
                 localStorage.setItem('prices', JSON.stringify(state.prices))
             }
         },
         removeGood: (state, {payload}) => {
             state.data = state.data.filter(item => item.id !== payload.id)
             state.data_id = [...state.data_id, payload.id]
-            state.prices = state.prices.filter(el => el !== Math.round(payload.price - (payload.price / 100 * payload?.salePercentage)) * +payload.qt)
+            state.prices = state.prices.filter(el => el.id !== payload.id)
             localStorage.setItem('prices', JSON.stringify(state.prices))
             localStorage.setItem('cart', JSON.stringify(state.data))
             localStorage.setItem('cart_id', JSON.stringify(state.data_id))
@@ -43,6 +43,13 @@ export const cartSlice = createSlice({
                     item.qt++
                 }
             })
+            // state.prices = state.prices.filter(el => {
+            //     if(el.id === payload.id) {
+            //         el.qt++
+            //         // state.prices = [...state.prices, {id: payload.id, price: Math.round(payload.item.price - (payload.item.price / 100 * payload.item?.salePercentage)) * payload.qt}]
+            //     }
+                
+            // })
             localStorage.setItem('cart', JSON.stringify(state.data))
         },
         decrement: (state, {payload}) => {
