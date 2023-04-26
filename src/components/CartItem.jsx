@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { decrement, increment, removeGood } from "../features/cart/cartSlice";
+import { decrement, increment, removeGood } from "../features/cart/cartSlice"
 
 const CartItem = ({item}) => {
     function prettify(num) {
