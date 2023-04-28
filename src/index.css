@@ -64,6 +64,9 @@ input{
   transition: 500ms;
   left: 0;
 }
+.inpText{
+  font-size: 12px !important; 
+}
 
 .hover:hover .hoverTwo div{
     opacity: 1;
