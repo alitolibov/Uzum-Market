@@ -1,3 +1,4 @@
+import { Input } from "@chakra-ui/react";
 import { useState } from "react";
 import Filter from "../components/Filter";
 import Item from "../components/Item";
@@ -39,9 +40,25 @@ const SearchResults = () => {
             <Filter open={open} changeOpen={changeOpen}/>
         </div>
         <hr />
-            <div className="">
-                <div className="w-[260px] flex flex-col gap-[15px]">
-                    <p className="font-[]">Категории</p>
+            <div className="mt-[20px]">
+                <div className="w-[260px] hidden flex-col gap-[12px] md:flex">
+                    <p className="font-[500]">Категории</p>
+                    <div className="">
+                    <p className="text-[14px] cursor-pointer py-[5px] duration-[300ms] hover:bg-[#00000010] rounded-[4px]">Электроника</p>
+                    <p className="text-[14px] cursor-pointer py-[5px] duration-[300ms] hover:bg-[#00000010] rounded-[4px]">Бытовая техника</p>
+                    <p className="text-[14px] cursor-pointer py-[5px] duration-[300ms] hover:bg-[#00000010] rounded-[4px]">Товары для дома</p>
+                    </div>
+                    <p className="font-[500]">Цена</p>
+                    <div className="flex items-center justify-between mt-[10px]">
+                <div className="border h-[40px] flex items-center gap-[10px] w-[48%] rounded-[4px] px-[8px]">
+                    <p className="text-[12.25px] text-[#00000080]">от</p>
+                    <Input variant='unstyled' placeholder="9000" name="from" className="inpText bg-transparent outline-none placeholder:text-[#62656a] placeholder:text-[12px]"/>
+                </div>
+                <div className="border h-[40px] flex items-center gap-[10px] w-[48%] rounded-[4px] px-[8px]">
+                    <p className="text-[12.25px] text-[#00000080]">до</p>
+                    <Input variant='unstyled' placeholder="50000" name="to" className="inpText bg-transparent outline-none placeholder:text-[#62656a] placeholder:text-[12px]"/>
+                </div>
+            </div>
                 </div>
             </div>
     </div> );

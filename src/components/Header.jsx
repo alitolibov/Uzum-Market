@@ -1,7 +1,8 @@
 import { Input, Select } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { getGoods } from "../features/goods/thunk";
 import CatalogMobile from "./CatalogMobile";
 
 
@@ -9,6 +10,22 @@ import CatalogMobile from "./CatalogMobile";
 const Header = () => {
 
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	let [arr, setArr] = useState([])
+
+	const {status, data} = useSelector((state) => state.goods)
+	
+	useEffect(() => {
+		if(!data.length) {
+			dispatch(getGoods())
+		}
+	}, []);
+    useEffect(() => {
+		if (data.length !== 0) {
+			data.filter(item => arr.push(item.title))
+		}
+	}, [data]);
 
 	const [open, setOpen] = useState(false)
 	const [toggleState, setToggleState] = useState(false)
