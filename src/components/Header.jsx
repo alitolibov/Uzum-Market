@@ -27,6 +27,22 @@ const Header = () => {
 		}
 	}, [data]);
 
+	const getOptions = (word, arr) => {
+		let opt = document.querySelector('#div')
+		let options = []
+		arr.filter(item => {
+			if(item.toLowerCase().includes(word.toLowerCase())) {
+				options.push(item)
+			}
+		})
+		let html = options.map(el => {
+			return `<div><span>${el}</span></div>`
+		})
+
+		opt.innerHTML = html
+
+	}
+
 	const [open, setOpen] = useState(false)
 	const [toggleState, setToggleState] = useState(false)
 
@@ -105,12 +121,15 @@ const Header = () => {
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" data-v-41ba8b3e=""><path fillRule="evenodd" clipRule="evenodd" d="M7.5 3C6.67157 3 6 3.67157 6 4.5H18C18 3.67157 17.3284 3 16.5 3H7.5ZM4.5 7.5C4.5 6.67157 5.17157 6 6 6H18C18.8284 6 19.5 6.67157 19.5 7.5H4.5ZM3 11.25C3 10.0074 4.00736 9 5.25 9H18.75C19.9926 9 21 10.0074 21 11.25V18.75C21 19.9926 19.9926 21 18.75 21H5.25C4.00736 21 3 19.9926 3 18.75V11.25ZM5.25 10.5C4.83579 10.5 4.5 10.8358 4.5 11.25V18.75C4.5 19.1642 4.83579 19.5 5.25 19.5H18.75C19.1642 19.5 19.5 19.1642 19.5 18.75V11.25C19.5 10.8358 19.1642 10.5 18.75 10.5H5.25Z" fill="#3131C4"></path></svg>
 							<p className="text-[14px] text-[#3131C4] font-[500]">Каталог</p>
 							</div>
-							<label className="w-[80%] h-[40px] borderFull rounded-[4px] flex pl-[16px]">
-							<Input variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории' />
+							<div className="w-full relative">
+							<label className="w-full h-[40px] borderFull rounded-[4px] flex pl-[16px] relative">
+							<Input onKeyUp={(e) => getOptions(e.target.value, arr)} variant='unstyled' className="w-full  bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории'/>
 							<div className="w-[15%] h-full bg-[#76797f0d] flex items-center justify-center">
 							<img src="../../public/images/search.png" className='w-[19px] h-[19px] cursor-pointer object-contain' alt="" />
 							</div>
-							</label>
+							</label>	
+							<ul id="div" className="w-full h-fit absolute left-0 top-[40px] z-10"></ul>
+							</div>		
 						</div> 
 					
 					<div className="flex items-center">
