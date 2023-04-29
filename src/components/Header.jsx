@@ -12,6 +12,7 @@ const Header = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [searchResults, setSearchResults] = useState([])
+	const [bold, setBold] = useState([])
 	const arr = useSelector((state) => state.goods.data)
 	
 
@@ -22,11 +23,15 @@ const Header = () => {
 		if(value.length !== 0) {
 			setSearchResults(arr.filter(item => {
 				if(item.title.toLowerCase().includes(value)) {
+					let re = new RegExp(value,"g");
+					bold.push({title: item.title.toLowerCase().replace(re, `<b>${value}</b>`), id:item.id})
+					console.log(bold.slice(0, 10));
 					return item
 				}
 			}))
 		} else {
 			setSearchResults([])
+			bold([])
 		}
 	}
 
@@ -54,6 +59,29 @@ const Header = () => {
 	const likedID = useSelector(state => state.liked.data)
     const cartData = useSelector(state => state.cart.data)
 
+	useEffect(() => {
+		// let items = document.querySelectorAll('.ellipsis')
+		// console.log(items);
+		// items.forEach(item => {
+		// 	bold.filter(el => {
+		// 		item.innerHTML = el.title
+		// 	})
+		// })
+		let ul = document.querySelector('#div')
+		for(let item of bold.slice(0, 10)) {
+			let div = document.createElement('div')
+			let img = document.createElement('div')
+			let p = document.createElement('p')
+
+			div.classList.add('divSearch')
+			img.classList.add('imgSearch')
+			p.classList.add('ellipsis')
+			p.innerHTML = item.title
+			ul.append(div)
+			div.append(img, p)
+
+		}
+	}, [bold.length])
 
 	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	return ( 
@@ -116,14 +144,14 @@ const Header = () => {
 							</div>
 							</label>	
 							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-10 bg-[white]" style={{display: searchResults.length !== 0 ? 'block' : 'none'}}>
-								{
-									searchResults.map(item => (
+								{/* {
+									bold.slice(0, 10).map(item => (
 										<Link key={item.id} to={`/search/${item.id}`} className="divSearch">
 											<div className="imgSearch"></div>
 											<p className="ellipsis">{item.title}</p>
 										</Link>
 									))
-								}
+								} */}
 							</ul>
 							</div>		
 						</div> 

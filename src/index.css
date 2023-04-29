@@ -171,13 +171,13 @@ box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
   width: 90%;
 }
 .imgSearch{
-  width: 20px;
-  height: 20px;
+  width: 17px;
+  height: 17px;
   background-image: url('../public/images/search.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  filter: invert(25%);
+  filter: invert(50%);
 }
 .divSearch {
   display: flex;
