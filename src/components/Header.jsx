@@ -1,8 +1,7 @@
-import { Input, Select } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getGoods } from "../features/goods/thunk";
 import CatalogMobile from "./CatalogMobile";
 
 
@@ -10,28 +9,27 @@ import CatalogMobile from "./CatalogMobile";
 const Header = () => {
 
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
-	const [searchResults, setSearchResults] = useState([])
 	const [bold, setBold] = useState([])
+	const [val, setVal] = useState(false)
 	const arr = useSelector((state) => state.goods.data)
-	
-
-
-
+	let ul = document.querySelector('#div')
+	let inp = document.querySelector('#inp')
 	const getOptions = (word) => {
+		setVal(!val)
 		let value = word.toLowerCase().trim()
 		if(value.length !== 0) {
-			setSearchResults(arr.filter(item => {
+			ul.style.display = 'block'
+			setBold([])
+			arr.filter(item => {
 				if(item.title.toLowerCase().includes(value)) {
 					let re = new RegExp(value,"g");
 					bold.push({title: item.title.toLowerCase().replace(re, `<b>${value}</b>`), id:item.id})
-					console.log(bold.slice(0, 10));
-					return item
+					reload(bold, ul)
 				}
-			}))
+			})
 		} else {
-			setSearchResults([])
-			bold([])
+			ul.style.display = 'none'
+			setBold([])
 		}
 	}
 
@@ -58,17 +56,11 @@ const Header = () => {
 
 	const likedID = useSelector(state => state.liked.data)
     const cartData = useSelector(state => state.cart.data)
+	// let ul = document.querySelector('#div')
 
-	useEffect(() => {
-		// let items = document.querySelectorAll('.ellipsis')
-		// console.log(items);
-		// items.forEach(item => {
-		// 	bold.filter(el => {
-		// 		item.innerHTML = el.title
-		// 	})
-		// })
-		let ul = document.querySelector('#div')
-		for(let item of bold.slice(0, 10)) {
+	function reload(arr, place) {
+		place.innerHTML = ''
+		for(let item of arr) {
 			let div = document.createElement('div')
 			let img = document.createElement('div')
 			let p = document.createElement('p')
@@ -77,11 +69,15 @@ const Header = () => {
 			img.classList.add('imgSearch')
 			p.classList.add('ellipsis')
 			p.innerHTML = item.title
-			ul.append(div)
+			place.append(div)
 			div.append(img, p)
 
+			div.onclick = () => {
+				inp.value = ''
+				navigate(`search/${item.id}`)
+			}
 		}
-	}, [bold.length])
+	}
 
 	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	return ( 
@@ -138,20 +134,12 @@ const Header = () => {
 							</div>
 							<div className="w-full relative">
 							<label className="w-full h-[40px] borderFull rounded-[4px] flex pl-[16px] relative">
-							<Input onKeyUp={(e) => getOptions(e.target.value)} variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории'/>
+							<Input onKeyUp={(e) => getOptions(e.target.value)} id="inp" variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории'/>
 							<div className="w-[15%] h-full bg-[#76797f0d] flex items-center justify-center">
 							<img src="../../public/images/search.png" className='w-[19px] h-[19px] cursor-pointer object-contain' alt="" />
 							</div>
 							</label>	
-							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-10 bg-[white]" style={{display: searchResults.length !== 0 ? 'block' : 'none'}}>
-								{/* {
-									bold.slice(0, 10).map(item => (
-										<Link key={item.id} to={`/search/${item.id}`} className="divSearch">
-											<div className="imgSearch"></div>
-											<p className="ellipsis">{item.title}</p>
-										</Link>
-									))
-								} */}
+							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-10 bg-[white]">
 							</ul>
 							</div>		
 						</div> 
