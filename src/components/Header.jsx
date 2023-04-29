@@ -118,7 +118,7 @@ const Header = () => {
 							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-10 bg-[white]" style={{display: searchResults.length !== 0 ? 'block' : 'none'}}>
 								{
 									searchResults.map(item => (
-										<Link to={`/search/${item.id}`} className="divSearch">
+										<Link key={item.id} to={`/search/${item.id}`} className="divSearch">
 											<div className="imgSearch"></div>
 											<p className="ellipsis">{item.title}</p>
 										</Link>
