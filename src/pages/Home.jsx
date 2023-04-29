@@ -11,19 +11,8 @@ import axios from "axios";
 import { getGoods } from "../features/goods/thunk";
 
 const Home = () => {
-    const [arr, setArr] = useState([])
     let dispatch = useDispatch()
-    const {status, data} = useSelector((state) => state.goods)
-    useEffect(() => {
-		if(!data.length) {
-			dispatch(getGoods())
-		}
-	}, []);
-    useEffect(() => {
-		if (data.length !== 0) {
-			setArr(data);
-		}
-	}, [data]);
+    const arr = useSelector((state) => state.goods.data)
 
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 

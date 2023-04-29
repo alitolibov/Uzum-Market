@@ -11,36 +11,23 @@ const Header = () => {
 
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-
-	let [arr, setArr] = useState([])
-
-	const {status, data} = useSelector((state) => state.goods)
+	const [searchResults, setSearchResults] = useState([])
+	const arr = useSelector((state) => state.goods.data)
 	
-	useEffect(() => {
-		if(!data.length) {
-			dispatch(getGoods())
+
+
+
+	const getOptions = (word) => {
+		let value = word.toLowerCase().trim()
+		if(value.length !== 0) {
+			setSearchResults(arr.filter(item => {
+				if(item.title.toLowerCase().includes(value)) {
+					return item
+				}
+			}))
+		} else {
+			setSearchResults([])
 		}
-	}, []);
-    useEffect(() => {
-		if (data.length !== 0) {
-			data.filter(item => arr.push(item.title))
-		}
-	}, [data]);
-
-	const getOptions = (word, arr) => {
-		let opt = document.querySelector('#div')
-		let options = []
-		arr.filter(item => {
-			if(item.toLowerCase().includes(word.toLowerCase())) {
-				options.push(item)
-			}
-		})
-		let html = options.map(el => {
-			return `<div><span>${el}</span></div>`
-		})
-
-		opt.innerHTML = html
-
 	}
 
 	const [open, setOpen] = useState(false)
@@ -71,7 +58,7 @@ const Header = () => {
 	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	return ( 
 		<>
-		<header className="flex flex-col gap-[15px] relative overflow-hidden">
+		<header className="flex flex-col gap-[15px] relative">
 			{
 				viewport_width > 1024 ? (
 					<div className="bg-[#f4f5f5] h-[32px]">
@@ -123,12 +110,21 @@ const Header = () => {
 							</div>
 							<div className="w-full relative">
 							<label className="w-full h-[40px] borderFull rounded-[4px] flex pl-[16px] relative">
-							<Input onKeyUp={(e) => getOptions(e.target.value, arr)} variant='unstyled' className="w-full  bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории'/>
+							<Input onKeyUp={(e) => getOptions(e.target.value)} variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории'/>
 							<div className="w-[15%] h-full bg-[#76797f0d] flex items-center justify-center">
 							<img src="../../public/images/search.png" className='w-[19px] h-[19px] cursor-pointer object-contain' alt="" />
 							</div>
 							</label>	
-							<ul id="div" className="w-full h-fit absolute left-0 top-[40px] z-10"></ul>
+							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-10 bg-[white]" style={{display: searchResults.length !== 0 ? 'block' : 'none'}}>
+								{
+									searchResults.map(item => (
+										<Link to={`/search/${item.id}`} className="divSearch">
+											<div className="imgSearch"></div>
+											<p className="ellipsis">{item.title}</p>
+										</Link>
+									))
+								}
+							</ul>
 							</div>		
 						</div> 
 					

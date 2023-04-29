@@ -20,7 +20,7 @@ export const goodsSlice = createSlice({
         state.status = "loading"
       })
       .addCase(getGoods.fulfilled, (state, action) => {
-        state.data.push(...action.payload)
+        state.data = action.payload
         state.status = 'fulfilled'
       })
       .addCase(getGoods.rejected, (state, action) => {

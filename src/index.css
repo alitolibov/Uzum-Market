@@ -67,6 +67,12 @@ input{
 .inpText{
   font-size: 12px !important; 
 }
+#div{
+  border: 1px solid rgba(118,121,127,0.3);
+  border-top: none;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  border-radius: 0 0 12px 12px;
+}
 
 .hover:hover .hoverTwo div{
     opacity: 1;
@@ -155,6 +161,34 @@ box-shadow: 1px 16px 22px -17px rgba(34, 60, 80, 0.2);
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+.ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 90%;
+}
+.imgSearch{
+  width: 20px;
+  height: 20px;
+  background-image: url('../public/images/search.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: invert(25%);
+}
+.divSearch {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px;
+  transition: 300ms;
+  cursor: pointer;
+}
+.divSearch:hover {
+  background-color: #00000010;
 }
 .rotate{
   top: 48%;
