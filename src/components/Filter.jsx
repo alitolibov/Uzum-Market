@@ -3,9 +3,6 @@ import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPane
 
 const Filter = ({open, changeOpen}) => {
 
-
-    console.log(open);
-
     useEffect(() => {
         let body = document.body
         let catalog = document.querySelector('#filter')

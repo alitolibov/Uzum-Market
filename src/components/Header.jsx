@@ -1,7 +1,7 @@
 import { Input } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CatalogMobile from "./CatalogMobile";
 
 
@@ -9,6 +9,7 @@ import CatalogMobile from "./CatalogMobile";
 const Header = () => {
 
 	const navigate = useNavigate()
+	const {state} = useLocation()
 	const [bold, setBold] = useState([])
 	const [val, setVal] = useState(false)
 	const arr = useSelector((state) => state.goods.data)
@@ -23,7 +24,7 @@ const Header = () => {
 			arr.filter(item => {
 				if(item.title.toLowerCase().includes(value)) {
 					let re = new RegExp(value,"g");
-					bold.push({title: item.title.toLowerCase().replace(re, `<b>${value}</b>`), id:item.id})
+					bold.push({title: item.title.toLowerCase().replace(re, `<b>${value}</b>`), id:item.id, type: item.type})
 					reload(bold, ul)
 				}
 			})
@@ -73,8 +74,9 @@ const Header = () => {
 			div.append(img, p)
 
 			div.onclick = () => {
+				ul.style.display = 'none'
+				navigate(`search/${item.id}`, {state: {id: item.id, word: inp.value, type: item.type}})
 				inp.value = ''
-				navigate(`search/${item.id}`)
 			}
 		}
 	}
@@ -139,7 +141,7 @@ const Header = () => {
 							<img src="../../public/images/search.png" className='w-[19px] h-[19px] cursor-pointer object-contain' alt="" />
 							</div>
 							</label>	
-							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-10 bg-[white]">
+							<ul id="div" className="w-full h-fit absolute hidden left-0 top-[40px] z-20 bg-[white]">
 							</ul>
 							</div>		
 						</div> 
