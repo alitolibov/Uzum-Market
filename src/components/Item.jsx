@@ -10,7 +10,7 @@ const Item = ({item}) => {
         return n.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, "$1" + ' ');
     }
 
-    let price = prettify(item.price) 
+    let price = prettify(item?.price) 
     let dispatch = useDispatch()
 
 

@@ -1,48 +1,82 @@
 import { Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation} from "react-router-dom";
 import Filter from "../components/Filter";
 import Item from "../components/Item";
+import { objCTX } from "../context/objCTX";
 
 
-const SearchResults = () => {
-
-	const {state} = useLocation()
-    const {id, word, type} = state
+const FindedProducts = () => {
+    const {state} = useLocation()
+    const {obj} = useContext(objCTX)
+    const {id, word, type} = obj
+    const [value, setValue] = useState('')
+    let data = useSelector(state => state.goods.data)
     const [open, setOpen] = useState(false)
+    let [arr, setArr] = useState([])
+    useEffect(() => {
+        if(arr.length === 0) {
+            let filtered = data.filter(item => item.title.toLowerCase().includes(word))
+            setArr(...arr, filtered)
+        }
+    }, [])
+    useEffect(() => {
+        switch (value) {
+            case 'Подешевле':
+            let sorted = arr.sort((a, b) => a.price - b.price, 0)
+            arr = sorted
+                console.log(arr);
+            break
+            case 'Подороже':
+            data = data.sort((a, b) => a.price - b.price, 0).reverse()
+            console.log(data);
+            break
+            case 'Высокий рейтинг':
+            data = data.sort((a, b) => a.rating - b.rating, 0).reverse()
+            console.log(data);
+            default:
+        }
+    }, [value])
     const [sort, setSort] = useState('Популярные')
-    const data = useSelector(state => state.goods.data)
-    let [arrFilter, setArrFilter] = useState([])
-    arrFilter = data.filter(item => item.title.toLowerCase().includes(word) || item.id === id || item.type === type)
-    
+
+    // arrFilter.push(...data.filter(item => item.title.toLowerCase().includes(word) || item.id === id))
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     const changeOpen = () => {
 		setOpen(!open)
 	}
 
-    function filterType(value) {
-        switch (value) {
-            case 'Подешевле':
-            setArrFilter([])
-            setArrFilter(arrFilter.sort((a, b) => a.price - b.price, 0))
-            console.log(arrFilter);
-            case 'Подороже':
-            setSort(value)
-            case 'Высокий рейтинг':
-            setSort(value)
-            default:
-            setSort(value)
-          }
-    }
+
+    // function filterType(value) {
+        
+    //     // switch (value) {
+    //     //     case 'Подешевле':
+            
+    //     //     // let sorted = arr.sort((a, b) => a.price - b.price, 0)
+    //     //     // setArr(sorted)
+    //     //     // console.log(arr);
+    //     //     break
+    //     //     case 'Подороже':
+    //     //     // data = data.sort((a, b) => a.price - b.price, 0).reverse()
+    //     //     // console.log(data);
+    //     //     break
+    //     //     case 'Высокий рейтинг':
+    //     //     // data = data.sort((a, b) => a.rating - b.rating, 0).reverse()
+    //     //     // console.log(data);
+    //     //     default:
+    //     //   }
+    // }
+
+    console.log(arr);
+
 
     return (
     <div className="">
         <div className="items-center justify-between md:flex">
-        <p className="text-[17.5px] font-[500] my-[15px] md:text-[24px]">Результаты поиска по запросу "<span>{word}</span>"</p>
+        <p className="text-[17.5px] font-[500] my-[15px] md:text-[24px]">Результаты поиска по запросу "<span>8</span>"</p>
         <div className="hidden items-center gap-[12.5px] md:flex">
             <p className="text-[14px] text-[#62656A]">Сортировка</p>
-            <select className="text-[14.4px] border-[1px] border-[#00000012]" onChange={(e) => filterType(e.target.value)}>
+            <select className="text-[14.4px] border-[1px] border-[#00000012]" onChange={(e) => setValue(e.target.value)}>
                 <option className="w-full" value="Популярные">Популярные</option>
                 <option className="w-full" value="Подешевле">Подешевле</option>
                 <option className="w-full" value="Подороже">Подороже</option>
@@ -84,13 +118,13 @@ const SearchResults = () => {
                 </div>
             </div>
                 </div>
-                <div className="w-[76.5%] grid grid-cols-2 gap-[8px] gap-y-[15px] auto mdx:grid-cols-2 lgx:grid-cols-3 lg:grid-cols-4 md:gap-x-[10px] md:gap-y-[15px] ">
+                <div className=" w-full grid grid-cols-2 gap-[8px] gap-y-[15px] auto mdx:grid-cols-3 lgx:grid-cols-4 lg:grid-cols-4 md:gap-x-[10px] md:gap-y-[15px] md:w-[76.5%]">
                     {
-                        arrFilter.map((item, idx) => <Item item={item} key={item.id}/>)
+                        arr.map((item, idx) => <Item item={item} key={item.id}/>)
                     }
                 </div>
             </div>
     </div> );
 }
  
-export default SearchResults;
+export default FindedProducts;

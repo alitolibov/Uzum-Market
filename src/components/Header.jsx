@@ -1,31 +1,35 @@
 import { Input } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { objCTX } from "../context/objCTX";
 import CatalogMobile from "./CatalogMobile";
 
 
 
 const Header = () => {
-
-	const navigate = useNavigate()
+	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	const {state} = useLocation()
+	const navigate = useNavigate()
 	const [bold, setBold] = useState([])
 	const [val, setVal] = useState(false)
+	const {changeObj, obj} = useContext(objCTX)
 	const arr = useSelector((state) => state.goods.data)
 	let ul = document.querySelector('#div')
+	let ul2 = document.querySelector('#div2')
 	let inp = document.querySelector('#inp')
 	const getOptions = (word) => {
 		setVal(!val)
 		let value = word.toLowerCase().trim()
 		if(value.length !== 0) {
 			ul.style.display = 'block'
+			ul2.style.display = 'block'
 			setBold([])
 			arr.filter(item => {
 				if(item.title.toLowerCase().includes(value)) {
-					let re = new RegExp(value,"g");
+					let re = new RegExp(value, "g");
 					bold.push({title: item.title.toLowerCase().replace(re, `<b>${value}</b>`), id:item.id, type: item.type})
-					reload(bold, ul)
+					reload(bold, viewport_width < 1024 ? ul2 : ul)
 				}
 			})
 		} else {
@@ -61,7 +65,7 @@ const Header = () => {
 
 	function reload(arr, place) {
 		place.innerHTML = ''
-		for(let item of arr) {
+		for(let item of arr.slice(0, 10)) {
 			let div = document.createElement('div')
 			let img = document.createElement('div')
 			let p = document.createElement('p')
@@ -75,13 +79,13 @@ const Header = () => {
 
 			div.onclick = () => {
 				ul.style.display = 'none'
-				navigate(`search/${item.id}`, {state: {id: item.id, word: inp.value, type: item.type}})
+				changeObj(item.id, inp.value, item.type)
+				// setObj({id: item.id, word: inp.value, type: item.type})
+				navigate(`search/${item.id}`)
 				inp.value = ''
 			}
 		}
 	}
-
-	const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 	return ( 
 		<>
 		<header className="flex flex-col gap-[15px] relative">
@@ -167,10 +171,13 @@ const Header = () => {
 					</Link>
 					</div>
 				</div>
-				<label className="flex items-center gap-[7px] bg-[#76797f1a] h-[35px] rounded-[8px] px-[20px] md:hidden">
+				<div className="relative md:hidden">
+				<label className="flex items-center gap-[7px] bg-[#76797f1a] h-[35px] rounded-[8px] px-[20px]">
 				<img src="../../public/images/search.png" className='w-[19px] h-[19px] invert-[40%] cursor-pointer object-contain' alt="" />
-				<Input variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории' />
+				<Input onKeyUp={(e) => getOptions(e.target.value)} variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории' />
 				</label>
+				<ul id="div2" className="w-full h-fit absolute hidden left-0 top-[40px] z-20 bg-[white]"></ul>
+				</div>
 			</div>
 			<div className="hidden items-center gap-[25px] h-[39px] md:flex lg:px-[0] lg:w-[1240px] lg:mx-auto">
 			<div className="flex items-center gap-[25px] px-[25px] whitespace-nowrap w-[92%] overflow-hidden lg:w-[100%] lg:px-[0]">

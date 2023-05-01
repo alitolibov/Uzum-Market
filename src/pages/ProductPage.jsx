@@ -12,7 +12,6 @@ import { addLiked, removeLiked } from "../features/liked/likedSlice";
 
 
 const ProductPage = () => {
-    let {cursor} = useContext(cursorCTX)
     let dispatch = useDispatch()
     const likedID = useSelector(state => state.liked.data_id)
     const cartData = useSelector(state => state.cart.data_id)
