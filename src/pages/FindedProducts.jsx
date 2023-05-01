@@ -53,7 +53,7 @@ const FindedProducts = () => {
     return (
     <div className="">
         <div className="items-center justify-between md:flex">
-        <p className="text-[17.5px] font-[500] my-[15px] md:text-[24px]">Результаты поиска по запросу "<span>8</span>"</p>
+        <p className="text-[17.5px] font-[500] my-[15px] md:text-[24px]">Результаты поиска по запросу "<span>{word}</span>"</p>
         <div className="hidden items-center gap-[12.5px] md:flex">
             <p className="text-[14px] text-[#62656A]">Сортировка</p>
             <select className="text-[14.4px] border-[1px] border-[#00000012]" onChange={(e) => setValue(e.target.value)}>
