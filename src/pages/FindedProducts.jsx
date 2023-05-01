@@ -14,7 +14,7 @@ const FindedProducts = () => {
     const [value, setValue] = useState('')
     let data = useSelector(state => state.goods.data)
     const [open, setOpen] = useState(false)
-    let [arr, setArr] = useState([])
+    const [arr, setArr] = useState([])
     useEffect(() => {
         if(arr.length === 0) {
             let filtered = data.filter(item => item.title.toLowerCase().includes(word))
@@ -24,17 +24,16 @@ const FindedProducts = () => {
     useEffect(() => {
         switch (value) {
             case 'Подешевле':
-            let sorted = arr.sort((a, b) => a.price - b.price, 0)
-            arr = sorted
-                console.log(arr);
+            let sorted = [...arr].sort((a,b) => a.price - b.price, 0)
+            setArr([...sorted])
             break
             case 'Подороже':
-            data = data.sort((a, b) => a.price - b.price, 0).reverse()
-            console.log(data);
+            let sorted2 = [...arr].sort((a,b) => a.price - b.price, 0).reverse()
+            setArr([...sorted2])
             break
             case 'Высокий рейтинг':
-            data = data.sort((a, b) => a.rating - b.rating, 0).reverse()
-            console.log(data);
+            let rating = [...arr].sort((a,b) => a.rating - b.rating, 0).reverse()
+            setArr([...rating])
             default:
         }
     }, [value])
