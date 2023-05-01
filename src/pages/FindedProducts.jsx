@@ -15,10 +15,12 @@ const FindedProducts = () => {
     let data = useSelector(state => state.goods.data)
     const [open, setOpen] = useState(false)
     const [arr, setArr] = useState([])
+    const [old, setOld] = useState([])
     useEffect(() => {
         if(arr.length === 0) {
             let filtered = data.filter(item => item.title.toLowerCase().includes(word))
             setArr(...arr, filtered)
+            setOld(...old, ...filtered)
         }
     }, [])
     useEffect(() => {
@@ -34,37 +36,16 @@ const FindedProducts = () => {
             case 'Высокий рейтинг':
             let rating = [...arr].sort((a,b) => a.rating - b.rating, 0).reverse()
             setArr([...rating])
+            break
             default:
         }
     }, [value])
-    const [sort, setSort] = useState('Популярные')
 
     // arrFilter.push(...data.filter(item => item.title.toLowerCase().includes(word) || item.id === id))
     const viewport_width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     const changeOpen = () => {
 		setOpen(!open)
 	}
-
-
-    // function filterType(value) {
-        
-    //     // switch (value) {
-    //     //     case 'Подешевле':
-            
-    //     //     // let sorted = arr.sort((a, b) => a.price - b.price, 0)
-    //     //     // setArr(sorted)
-    //     //     // console.log(arr);
-    //     //     break
-    //     //     case 'Подороже':
-    //     //     // data = data.sort((a, b) => a.price - b.price, 0).reverse()
-    //     //     // console.log(data);
-    //     //     break
-    //     //     case 'Высокий рейтинг':
-    //     //     // data = data.sort((a, b) => a.rating - b.rating, 0).reverse()
-    //     //     // console.log(data);
-    //     //     default:
-    //     //   }
-    // }
 
     console.log(arr);
 
