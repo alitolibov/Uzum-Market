@@ -80,11 +80,18 @@ const Header = () => {
 			div.onclick = () => {
 				ul.style.display = 'none'
 				changeObj(item.id, inp.value, item.type)
-				// setObj({id: item.id, word: inp.value, type: item.type})
-				navigate(`search/${item.id}`)
+				navigate(`search`)
 				inp.value = ''
 			}
 		}
+	}
+
+	function submit() {
+		console.log(inp.value);
+		ul.style.display = 'none'
+		changeObj('', inp.value, '')
+		navigate(`search`)
+		inp.value = ''
 	}
 	return ( 
 		<>
@@ -141,7 +148,7 @@ const Header = () => {
 							<div className="w-full relative">
 							<label className="w-full h-[40px] borderFull rounded-[4px] flex pl-[16px] relative">
 							<Input onKeyUp={(e) => getOptions(e.target.value)} id="inp" variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории'/>
-							<div className="w-[15%] h-full bg-[#76797f0d] flex items-center justify-center">
+							<div onClick={submit} className="w-[15%] h-full bg-[#76797f0d] flex items-center justify-center">
 							<img src="../../public/images/search.png" className='w-[19px] h-[19px] cursor-pointer object-contain' alt="" />
 							</div>
 							</label>	
@@ -173,7 +180,7 @@ const Header = () => {
 				</div>
 				<div className="relative md:hidden">
 				<label className="flex items-center gap-[7px] bg-[#76797f1a] h-[35px] rounded-[8px] px-[20px]">
-				<img src="../../public/images/search.png" className='w-[19px] h-[19px] invert-[40%] cursor-pointer object-contain' alt="" />
+				<img onClick={submit} src="../../public/images/search.png" className='w-[19px] h-[19px] invert-[40%] cursor-pointer object-contain' alt="" />
 				<Input onKeyUp={(e) => getOptions(e.target.value)} variant='unstyled' className="w-full bg-[transparent] outline-none text-[14px] placeholder:text-[#62656a] placeholder:text-[14px] px-[5px]" placeholder='Искать товары и категории' />
 				</label>
 				<ul id="div2" className="w-full h-fit absolute hidden left-0 top-[40px] z-20 bg-[white]"></ul>

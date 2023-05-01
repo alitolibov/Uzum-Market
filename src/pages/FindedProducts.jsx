@@ -18,7 +18,7 @@ const FindedProducts = () => {
     const [old, setOld] = useState([])
     useEffect(() => {
         if(arr.length === 0) {
-            let filtered = data.filter(item => item.title.toLowerCase().includes(word))
+            let filtered = type !== '' ? data.filter(item => item.type === type) : data.filter(item => item.title.toLowerCase().includes(word))
             setArr(...arr, filtered)
             setOld(...old, ...filtered)
         }
