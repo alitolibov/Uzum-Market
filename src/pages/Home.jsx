@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Item from "../components/Item";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { getGoods } from "../features/goods/thunk";
+import { getGoods } from "../features/goods/thunk"
 
 const Home = () => {
     let dispatch = useDispatch()
