@@ -8,7 +8,7 @@ import SwiperProduct from "../components/SwiperProduct";
 import SwiperProductMobile from "../components/SwiperProductMobile";
 import { cursorCTX } from "../context/cursorCTX";
 import { addGood, removeGood } from "../features/cart/cartSlice";
-import { addLiked, removeLiked } from "../features/liked/likedSlice";
+import { addLiked, removeLiked } from "../features/liked/likedSlice"
 
 
 const ProductPage = () => {
